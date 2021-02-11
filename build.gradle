@@ -1,0 +1,56 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+java {
+	version = '21.1' 
+    sourceCompatibility = JavaVersion.VERSION_14
+    targetCompatibility = JavaVersion.VERSION_14
+}
+
+repositories {
+    // Use jcenter for resolving dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+dependencies {
+	// https://mvnrepository.com/artifact/org.jdom/jdom
+	implementation 'org.jdom:jdom:2.0.2'
+
+	// https://mvnrepository.com/artifact/commons-cli/commons-cli
+	implementation 'commons-cli:commons-cli:1.4'
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+	implementation 'org.apache.commons:commons-lang3:3.9'
+	
+	// https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore
+	implementation 'org.apache.httpcomponents:httpcore:4.4.14'	
+	// https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+	implementation 'org.apache.httpcomponents:httpclient:4.5.13'	
+	// https://mvnrepository.com/artifact/org.apache.httpcomponents/httpmime
+	implementation 'org.apache.httpcomponents:httpmime:4.5.13'	
+	
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.1'
+		
+	// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
+	implementation 'org.apache.logging.log4j:log4j-api:2.14.0'	
+	// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+	implementation 'org.apache.logging.log4j:log4j-core:2.14.0'
+	
+	implementation 'net.dean.jraw:JRAW:1.1.0'
+	
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.13.1'		
+    
+	// https://mvnrepository.com/artifact/org.powermock/powermock-api-mockito2
+	testImplementation 'org.powermock:powermock-api-mockito2:2.0.9'
+	// https://mvnrepository.com/artifact/org.powermock/powermock-module-junit4-rule-agent
+	testImplementation 'org.powermock:powermock-module-junit4-rule-agent:2.0.9'	
+	// https://mvnrepository.com/artifact/org.powermock/powermock-module-junit4-rule
+	testImplementation 'org.powermock:powermock-module-junit4-rule:2.0.9'
+	// https://mvnrepository.com/artifact/org.powermock/powermock-module-junit4
+	testImplementation 'org.powermock:powermock-module-junit4:2.0.9'
+	// https://mvnrepository.com/artifact/org.powermock/powermock-module-testng
+	testImplementation 'org.powermock:powermock-module-testng:2.0.9'	
+}
