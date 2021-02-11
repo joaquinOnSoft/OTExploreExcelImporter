@@ -1,0 +1,106 @@
+{
+	"field": [
+		{
+			"excelName": "Identificadorticket",
+			"solrName": "IdentificadorTicket",
+			"type": "integer",
+			"skip": false			
+		},
+		{
+			"excelName": "FechaApertura",
+			"solrName": "FechaApertura",
+			"type": "date",
+			"skip": false					
+		},
+		{
+			"excelName": "FechaCierre",
+			"solrName": "FechaCierre",
+			"type": "date",
+			"skip": false					
+		},
+		{
+			"excelName": "EsContactar",
+			"solrName": "EsContactar",
+			"type": "string",
+			"skip": false					
+		},
+		{
+			"excelName": "CPI",
+			"solrName": "CPI",
+			"type": "integer",
+			"skip": false					
+		},
+		{
+			"excelName": "Producto",
+			"solrName": "Producto",
+			"type": "string",
+			"skip": false					
+		},		
+		{
+			"excelName": "TipoPeticion",
+			"solrName": "TipoPeticion",
+			"type": "string",
+			"skip": false					
+		},
+		{
+			"excelName": "Comentarios del back office tramitador",
+			"solrName": "ComentariosTramitador",
+			"type": "string",
+			"skip": false					
+		},
+		{
+			"excelName": "Comentarios_Oficina sobre la queja",
+			"solrName": "ComentariosOficina",
+			"type": "string",
+			"skip": false					
+		},
+		{
+			"excelName": "Departamento",
+			"solrName": "Departamento",
+			"type": "string",
+			"skip": false					
+		},
+		{
+			"excelName": "Estado",
+			"solrName": "Estado",
+			"type": "string",
+			"skip": false					
+		},
+		{
+			"excelName": "CPI",
+			"solrName": "CPI",
+			"type": "integer",
+			"skip": true					
+		},
+		{
+			"excelName": "Familia",
+			"solrName": "Familia",
+			"type": "string",
+			"skip": false					
+		},
+		{
+			"excelName": "Producto",
+			"solrName": "Producto",
+			"type": "integer",
+			"skip": true					
+		},		
+		{
+			"excelName": "TipoPeticion",
+			"solrName": "TipoPeticion",
+			"type": "string",
+			"skip": true					
+		},
+		{
+			"excelName": "Motivo_Queja",
+			"solrName": "MotivoQueja",
+			"type": "string",
+			"skip": false					
+		},
+		{
+			"excelName": "Origen_Queja_2",
+			"solrName": "OrigenQueja",
+			"type": "string",
+			"skip": false					
+		}																												
+	]
+}
