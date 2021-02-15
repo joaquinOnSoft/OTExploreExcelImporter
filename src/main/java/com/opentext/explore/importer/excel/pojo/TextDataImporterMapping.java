@@ -27,12 +27,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "field"
+    "fields"
 })
 public class TextDataImporterMapping {
 
-    @JsonProperty("field")
-    private List<Field> field = new ArrayList<Field>();
+    @JsonProperty("fields")
+    private List<Field> fields = new ArrayList<Field>();
 
     /**
      * No args constructor for use in serialization
@@ -47,17 +47,17 @@ public class TextDataImporterMapping {
      */
     public TextDataImporterMapping(List<Field> field) {
         super();
-        this.field = field;
+        this.fields = field;
     }
 
     @JsonProperty("field")
-    public List<Field> getField() {
-        return field;
+    public List<Field> getFields() {
+        return fields;
     }
 
     @JsonProperty("field")
-    public void setField(List<Field> field) {
-        this.field = field;
+    public void setFields(List<Field> fields) {
+        this.fields = fields;
     }
 
 }

@@ -74,7 +74,7 @@ public class ExcelReader implements ITextDataReader{
 		List<TextData> textDataList = new LinkedList<TextData>();
 		TextData txtData = null;
 
-		List<Field> fields = config.getField();
+		List<Field> fields = config.getFields();
 		Field field = null;
 		
 		String cellValue = null;
@@ -89,7 +89,7 @@ public class ExcelReader implements ITextDataReader{
 			// Getting the Sheet at index zero
 			Sheet sheet = workbook.getSheetAt(0);
 
-			// 2. Or you can use a for-each loop to iterate over the rows and columns
+			// Use a for-each loop to iterate over the rows and columns
 			log.debug("Iterating over Rows and Columns using for-each loop");
 			boolean firstRow = true;
 			boolean allCellValuesInRowAreEmpty = true;

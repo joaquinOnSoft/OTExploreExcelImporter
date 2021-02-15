@@ -1,5 +1,5 @@
 {
-	"field": [
+	"fields": [
 		{
 			"excelName": "Identificadorticket",
 			"solrName": "reference_id",

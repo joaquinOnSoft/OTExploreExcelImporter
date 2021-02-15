@@ -39,7 +39,7 @@ public class TestJSonMappingConfigReader extends TestCase {
 		TextDataImporterMapping mapping = jsonConfigReader.read(jsonConfigFile);
 		
 		assertNotNull(mapping);
-		List<Field> fields = mapping.getField();
+		List<Field> fields = mapping.getFields();
 		assertNotNull(fields);
 		assertEquals(17, fields.size());
 		

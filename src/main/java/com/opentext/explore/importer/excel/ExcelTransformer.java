@@ -63,7 +63,7 @@ public class ExcelTransformer extends AbstractTransformer {
 				Map<String, String> fields = txtData.getFields();
 				if(fields != null) {
 					for (Map.Entry<String, String> entry : fields.entrySet()) {
-					    log.debug(entry.getKey() + "/" + entry.getValue());
+					    log.debug(entry.getKey() + " / " + entry.getValue());
 					    eDoc.addContent(createElementField(entry.getKey() , entry.getValue()));
 					}					
 				}
