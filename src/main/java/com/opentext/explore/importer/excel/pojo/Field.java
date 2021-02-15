@@ -1,4 +1,5 @@
 /*
+
  *   (C) Copyright 2021 OpenText and others.
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,6 +39,8 @@ public class Field {
     private String solrName;
     @JsonProperty("type")
     private String type;
+    @JsonProperty("format")
+    private String format;    
     @JsonProperty("skip")
     private Boolean skip;
 
@@ -55,11 +58,12 @@ public class Field {
      * @param solrName
      * @param type
      */
-    public Field(String excelName, String solrName, String type, Boolean skip) {
+    public Field(String excelName, String solrName, String type, String format, Boolean skip) {
         super();
         this.excelName = excelName;
         this.solrName = solrName;
         this.type = type;
+        this.format = format;
         this.skip = skip;
     }
 
@@ -92,8 +96,18 @@ public class Field {
     public void setType(String type) {
         this.type = type;
     }
+        
+    @JsonProperty("format")
+    public String getFormat() {
+		return format;
+	}
 
-    @JsonProperty("skip")
+    @JsonProperty("format")    
+	public void setFormat(String format) {
+		this.format = format;
+	}
+
+	@JsonProperty("skip")
     public Boolean getSkip() {
         return skip;
     }
@@ -102,5 +116,4 @@ public class Field {
     public void setSkip(Boolean skip) {
         this.skip = skip;
     }
-
 }

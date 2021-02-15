@@ -2,20 +2,22 @@
 	"field": [
 		{
 			"excelName": "Identificadorticket",
-			"solrName": "IdentificadorTicket",
+			"solrName": "reference_id",
 			"type": "integer",
 			"skip": false			
 		},
 		{
 			"excelName": "FechaApertura",
-			"solrName": "FechaApertura",
+			"solrName": "published_date",
 			"type": "date",
+			"format": "MM/dd/yy",
 			"skip": false					
 		},
 		{
 			"excelName": "FechaCierre",
 			"solrName": "FechaCierre",
 			"type": "date",
+			"format": "MM/dd/yy",			
 			"skip": false					
 		},
 		{
@@ -44,7 +46,7 @@
 		},
 		{
 			"excelName": "Comentarios del back office tramitador",
-			"solrName": "ComentariosTramitador",
+			"solrName": "content",
 			"type": "string",
 			"skip": false					
 		},

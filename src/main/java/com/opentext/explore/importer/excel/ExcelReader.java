@@ -21,30 +21,157 @@ package com.opentext.explore.importer.excel;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+
+import com.opentext.explore.importer.excel.pojo.Field;
+import com.opentext.explore.importer.excel.pojo.TextData;
+import com.opentext.explore.importer.excel.pojo.TextDataImporterMapping;
+import com.opentext.explore.util.DateUtil;
 
 /**
  * Read excel files in Java using a very simple yet powerful open source library called Apache POI.
  * @see https://www.callicoder.com/java-read-excel-file-apache-poi/ 
  * @author Joaquín Garzón
  */
-public class ExcelReader {
-	private Workbook workbook;
+public class ExcelReader implements ITextDataReader{
+	private static final String SOLR_FIELD_REFERENCE_ID ="reference_id";
+	private static final String SOLR_FIELD_INTERACTION_ID = "interaction_id";
+	private static final String SOLR_FIELD_TITLE = "title";
+	private static final String SOLR_FIELD_AUTHOR_NAME = "author_name";
+	private static final String SOLR_FIELD_ID = "ID";
+	private static final String SOLR_FIELD_TYPE = "type";
+	private static final String SOLR_FIELD_PUBLISHED_DATE = "published_date";
+	private static final String SOLR_FIELD_DATE_TIME = "date_time";
+	private static final String SOLR_FIELD_CONTENT = "content";
+	
 	protected static final Logger log = LogManager.getLogger(ExcelReader.class);
 
-	public ExcelReader(String fileName) throws EncryptedDocumentException, IOException {
-		// Creating a Workbook from an Excel file (.xls or .xlsx)
-		workbook = WorkbookFactory.create(new File(fileName));
-
-		// Retrieving the number of sheets in the Workbook
-		log.debug("Workbook has " + workbook.getNumberOfSheets() + " Sheets : ");
+	@Override
+	public List<TextData> read(String filePath, TextDataImporterMapping config) {
+		if(filePath != null) {
+			return read(new File(filePath), config);	
+		}
+		else {
+			log.warn("File path was null");
+			return null;
+		}		
 	}
 
-	
+	@Override
+	public List<TextData> read(File file, TextDataImporterMapping config) {
+		List<TextData> textDataList = new LinkedList<TextData>();
+		TextData txtData = null;
 
+		List<Field> fields = config.getField();
+		Field field = null;
+		
+		String cellValue = null;
+
+		try {
+			// Creating a Workbook from an Excel file (.xls or .xlsx)
+			Workbook workbook = WorkbookFactory.create(file);
+
+			// Create a DataFormatter to format and get each cell's value as String
+	        DataFormatter dataFormatter = new DataFormatter();			
+			
+			// Getting the Sheet at index zero
+			Sheet sheet = workbook.getSheetAt(0);
+
+			// 2. Or you can use a for-each loop to iterate over the rows and columns
+			System.out.println("Iterating over Rows and Columns using for-each loop");
+			boolean firstRow = true;
+			boolean allCellValuesInRowAreEmpty = true;
+			int column = 0;
+
+			for (Row row: sheet) {
+				if(firstRow) {
+					log.debug("Skipping first row (header)");
+					firstRow = false;
+					continue;
+				}
+				
+				column = 0;
+				txtData = new TextData();
+				allCellValuesInRowAreEmpty = true;
+
+				for(Cell cell: row) {
+					field = fields.get(column);
+
+					if(field.getSkip()) {
+						log.info("Excel field " + field.getExcelName() + " skipped");
+					}
+					else {
+						cellValue = dataFormatter.formatCellValue(cell);
+						
+						if(cellValue != null && cellValue.compareTo("") != 0) {
+							allCellValuesInRowAreEmpty = false;
+						}
+												
+						switch (field.getSolrName()) {
+						case SOLR_FIELD_REFERENCE_ID:
+							txtData.setReferenceId(cellValue);
+							break;
+						case SOLR_FIELD_INTERACTION_ID:
+							txtData.setInteractionId(cellValue);
+							break;
+						case SOLR_FIELD_TITLE:
+							txtData.setTitle(cellValue);
+							break;
+						case SOLR_FIELD_AUTHOR_NAME:
+							txtData.setAuthorName(cellValue);
+							break;
+						case SOLR_FIELD_ID:
+							txtData.setId(cellValue);
+							break;
+						case SOLR_FIELD_TYPE:
+							txtData.setType(cellValue);
+							break;
+						case SOLR_FIELD_PUBLISHED_DATE:
+							if(cellValue != null && cellValue.compareTo("") != 0) {
+								txtData.setPublishedDate(DateUtil.strToDate(cellValue, field.getFormat()));	
+							}							
+							break;
+						case SOLR_FIELD_DATE_TIME:
+							if(cellValue != null && cellValue.compareTo("") != 0) {
+								txtData.setDateTime(DateUtil.strToDate(cellValue, field.getFormat()));	
+							}							
+							break;
+						case SOLR_FIELD_CONTENT:
+							txtData.setContent(cellValue);
+							break;
+						default:
+							txtData.addField(field.getSolrName(), cellValue);							
+						}
+					}
+
+					column++;					
+				}
+
+				if(allCellValuesInRowAreEmpty == false) {
+					textDataList.add(txtData);	
+				}				
+			}
+			
+	        // Closing the workbook
+	        workbook.close();			
+		} catch (EncryptedDocumentException | IOException e) {
+			log.error("Error reading excel file. ", e);
+		} catch (ParseException e) {
+			log.error("Error formating date. ", e);
+		}
+
+		return textDataList;
+	}
 }
