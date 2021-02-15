@@ -29,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "excelName",
     "solrName",
     "type",
+    "format",
     "skip"
 })
 public class Field {
@@ -40,7 +41,7 @@ public class Field {
     @JsonProperty("type")
     private String type;
     @JsonProperty("format")
-    private String format;    
+    private String format;        
     @JsonProperty("skip")
     private Boolean skip;
 
@@ -57,6 +58,8 @@ public class Field {
      * @param skip
      * @param solrName
      * @param type
+     * @param format
+     * @param skip
      */
     public Field(String excelName, String solrName, String type, String format, Boolean skip) {
         super();

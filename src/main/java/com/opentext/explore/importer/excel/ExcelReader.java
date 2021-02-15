@@ -90,7 +90,7 @@ public class ExcelReader implements ITextDataReader{
 			Sheet sheet = workbook.getSheetAt(0);
 
 			// 2. Or you can use a for-each loop to iterate over the rows and columns
-			System.out.println("Iterating over Rows and Columns using for-each loop");
+			log.debug("Iterating over Rows and Columns using for-each loop");
 			boolean firstRow = true;
 			boolean allCellValuesInRowAreEmpty = true;
 			int column = 0;

@@ -22,6 +22,8 @@ package com.opentext.explore.importer.excel;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jdom2.CDATA;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -32,7 +34,8 @@ import com.opentext.explore.importer.AbstractTransformer;
 import com.opentext.explore.importer.excel.pojo.TextData;
 
 public class ExcelTransformer extends AbstractTransformer {
-	
+	protected static final Logger log = LogManager.getLogger(ExcelTransformer.class);
+
 	private static Document textDataToDoc(List<TextData> txtDatas, String tag) {
 		Document doc = null;
 		
@@ -50,7 +53,7 @@ public class ExcelTransformer extends AbstractTransformer {
 				eDoc.addContent(createElementField("title", txtData.getTitle()));
 				eDoc.addContent(createElementField("author_name", txtData.getAuthorName()));
 				eDoc.addContent(createElementField("ID", txtData.getId()));
-				eDoc.addContent(createElementField("type", "Reddit"));	
+				eDoc.addContent(createElementField("type", txtData.getType()));	
 				eDoc.addContent(createElementField("published_date", txtData.getPublishedDate()));
 				//eDoc.addContent(createElementField("date_time", txtData.getCreated()));
 				eDoc.addContent(createElementField("content", new CDATA(txtData.getContent())));				
@@ -60,7 +63,7 @@ public class ExcelTransformer extends AbstractTransformer {
 				Map<String, String> fields = txtData.getFields();
 				if(fields != null) {
 					for (Map.Entry<String, String> entry : fields.entrySet()) {
-					    System.out.println(entry.getKey() + "/" + entry.getValue());
+					    log.debug(entry.getKey() + "/" + entry.getValue());
 					    eDoc.addContent(createElementField(entry.getKey() , entry.getValue()));
 					}					
 				}
