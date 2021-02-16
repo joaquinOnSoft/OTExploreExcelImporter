@@ -112,6 +112,11 @@
 			"javaClass": "com.opentext.explore.importer.excel.fieldhandlers.FieldHandlerCopy"
 		},
 		{
+			"inputSolrNames": ["published_date"],
+			"outputSolrNames": ["date_time"],
+			"javaClass": "com.opentext.explore.importer.excel.fieldhandlers.FieldHandlerCopy"
+		},		
+		{
 			"inputSolrNames": ["content", "ComentariosOficina"],
 			"outputSolrNames": ["content"],
 			"javaClass": "com.opentext.explore.importer.excel.fieldhandlers.FieldHandlerConcat"

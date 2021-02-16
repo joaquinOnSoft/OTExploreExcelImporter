@@ -5,7 +5,7 @@
     </Properties>
  
     <Appenders>
-        <RollingFile name="fileLogger" fileName="${basePath}/ot-explore-reddit-importer.log" filePattern="${basePath}/ot-explore-twitter-importer-%d{yyyy-MM-dd}.log">
+        <RollingFile name="fileLogger" fileName="${basePath}/ot-explore-excel-importer.log" filePattern="${basePath}/ot-explore-twitter-importer-%d{yyyy-MM-dd}.log">
             <PatternLayout>
                 <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
             </PatternLayout>
@@ -28,9 +28,15 @@
         <Logger name="com.opentext.explore.importer" level="debug" additivity="true">
             <appender-ref ref="fileLogger" level="debug" />
         </Logger>        
-        <Logger name="com.opentext.explore.importer.reddit" level="debug" additivity="true">
+        <Logger name="com.opentext.explore.importer.excel" level="debug" additivity="true">
             <appender-ref ref="fileLogger" level="debug" />
         </Logger>
+        <Logger name="com.opentext.explore.importer.excel.fieldhandlers" level="debug" additivity="true">
+            <appender-ref ref="fileLogger" level="debug" />
+        </Logger>        
+        <Logger name="com.opentext.explore.importer.excel.pojo" level="debug" additivity="true">
+            <appender-ref ref="fileLogger" level="debug" />
+        </Logger>        
         <Logger name="com.opentext.explore.util" level="debug" additivity="true">
             <appender-ref ref="fileLogger" level="debug" />
         </Logger>                

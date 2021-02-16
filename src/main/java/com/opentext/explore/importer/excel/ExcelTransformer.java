@@ -19,6 +19,11 @@
  */
 package com.opentext.explore.importer.excel;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +60,7 @@ public class ExcelTransformer extends AbstractTransformer {
 				eDoc.addContent(createElementField("ID", txtData.getId()));
 				eDoc.addContent(createElementField("type", txtData.getType()));	
 				eDoc.addContent(createElementField("published_date", txtData.getPublishedDate()));
-				//eDoc.addContent(createElementField("date_time", txtData.getCreated()));
+				eDoc.addContent(createElementField("date_time", txtData.getDateTime()));
 				eDoc.addContent(createElementField("content", new CDATA(txtData.getContent())));				
 
 				
@@ -78,8 +83,7 @@ public class ExcelTransformer extends AbstractTransformer {
 		
 		return doc;
 	}	
-	
-	
+		
 	/**
 	 * Generate a XML string using the given Text data (coming from a Excel or CSV file) 
 	 * SEE: How to create XML file with specific structure in Java 
@@ -100,4 +104,47 @@ public class ExcelTransformer extends AbstractTransformer {
 		
 		return xml;
 	}	
+	
+	/**
+	 * Generate a XML file using the given TextData (Excel or CSV row) 
+	 * @param txtData -  TextData (Excel or CSV row)
+	 * @param fileName - File name of the XML that will be generated
+	 * @return path of the XML file created
+	 * @throws IOException
+	 */	
+	public static String textDataToXMLFile(TextData txtData, String fileName, String tag) throws IOException {
+		List<TextData> tempTextDatas = new LinkedList<TextData>();
+		tempTextDatas.add(txtData);		
+		
+		return textDatasToXMLFile(tempTextDatas, fileName, tag);
+	}	
+	
+	/**
+	 * Generate a XML file using the given TextData (Excel or CSV row) 
+	 * @param textDatas - List of  TextData (Excel or CSV row)
+	 * @param fileName - File name of the XML that will be generated
+	 * @param tag - Tag to be added to the TextData
+	 * @return Absolute path of the XML file created
+	 * @throws IOException
+	 */
+	public static String textDatasToXMLFile(List<TextData> textDatas, String fileName, String tag) throws IOException {
+		String xmlPath = null;
+		Document doc = textDataToDoc(textDatas, tag);
+
+		if(doc != null) {
+			//Create the XML
+			XMLOutputter outter=new XMLOutputter();
+			outter.setFormat(Format.getPrettyFormat());
+			
+			File xmlFile = new File(fileName);
+			xmlPath = xmlFile.getAbsolutePath();
+			FileWriter fWriter = new FileWriter(xmlFile, StandardCharsets.UTF_8);
+			
+			outter.output(doc, fWriter);
+			
+			fWriter.close();
+		}		
+		
+		return xmlPath;		
+	}					
 }
