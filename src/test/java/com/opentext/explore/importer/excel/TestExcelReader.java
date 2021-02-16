@@ -30,7 +30,7 @@ import com.opentext.explore.util.FileUtil;
 
 import junit.framework.TestCase;
 
-public class TestExcelReader  extends TestCase {
+public class TestExcelReader extends TestCase {
 	@Test
 	public void testRead() {
 		File excelFile = FileUtil.getFileFromResources("input_example.xlsx");

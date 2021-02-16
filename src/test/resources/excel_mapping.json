@@ -1,22 +1,24 @@
 {
-	"field": [
+	"fields": [
 		{
 			"excelName": "Identificadorticket",
-			"solrName": "IdentificadorTicket",
+			"solrName": "reference_id",
 			"type": "integer",
 			"skip": false			
 		},
 		{
 			"excelName": "FechaApertura",
-			"solrName": "FechaApertura",
-			"type": "date",
-			"skip": false					
+			"solrName": "published_date",
+			"type": "date",			
+			"skip": false,
+			"format": "MM/dd/yy"					
 		},
 		{
 			"excelName": "FechaCierre",
 			"solrName": "FechaCierre",
-			"type": "date",
-			"skip": false					
+			"type": "date",					
+			"skip": false,
+			"format": "MM/dd/yy"								
 		},
 		{
 			"excelName": "EsContactar",
@@ -44,7 +46,7 @@
 		},
 		{
 			"excelName": "Comentarios del back office tramitador",
-			"solrName": "ComentariosTramitador",
+			"solrName": "content",
 			"type": "string",
 			"skip": false					
 		},
@@ -102,5 +104,17 @@
 			"type": "string",
 			"skip": false					
 		}																												
+	],
+	"fieldHandlers":[
+		{
+			"inputSolrNames": ["reference_id"],
+			"outputSolrNames": ["interaction_id", "ID"],
+			"javaClass": "com.opentext.explore.importer.excel.fieldhandlers.FieldHandlerCopy"
+		},
+		{
+			"inputSolrNames": ["content"],
+			"outputSolrNames": ["content", "ComentariosOficina"],
+			"javaClass": "com.opentext.explore.importer.excel.fieldhandlers.FieldHandlerConcat"
+		}		
 	]
 }

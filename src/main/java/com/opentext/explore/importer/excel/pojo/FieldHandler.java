@@ -32,36 +32,49 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "fields",
-    "fieldHandlers"
+    "inputSolrNames",
+    "outputSolrNames",
+    "javaClass"
 })
-public class TextDataImporterMapping {
+public class FieldHandler {
 
-    @JsonProperty("fields")
-    private List<Field> fields = null;
-    @JsonProperty("fieldHandlers")
-    private List<FieldHandler> fieldHandlers = null;
+    @JsonProperty("inputSolrNames")
+    private List<String> inputSolrNames = null;
+    @JsonProperty("outputSolrNames")
+    private List<String> outputSolrNames = null;
+    @JsonProperty("javaClass")
+    private String javaClass;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("fields")
-    public List<Field> getFields() {
-        return fields;
+    @JsonProperty("inputSolrNames")
+    public List<String> getInputSolrNames() {
+        return inputSolrNames;
     }
 
-    @JsonProperty("fields")
-    public void setFields(List<Field> fields) {
-        this.fields = fields;
+    @JsonProperty("inputSolrNames")
+    public void setInputSolrNames(List<String> inputSolrNames) {
+        this.inputSolrNames = inputSolrNames;
     }
 
-    @JsonProperty("fieldHandlers")
-    public List<FieldHandler> getFieldHandlers() {
-        return fieldHandlers;
+    @JsonProperty("outputSolrNames")
+    public List<String> getOutputSolrNames() {
+        return outputSolrNames;
     }
 
-    @JsonProperty("fieldHandlers")
-    public void setFieldHandlers(List<FieldHandler> fieldHandlers) {
-        this.fieldHandlers = fieldHandlers;
+    @JsonProperty("outputSolrNames")
+    public void setOutputSolrNames(List<String> outputSolrNames) {
+        this.outputSolrNames = outputSolrNames;
+    }
+
+    @JsonProperty("javaClass")
+    public String getJavaClass() {
+        return javaClass;
+    }
+
+    @JsonProperty("javaClass")
+    public void setJavaClass(String javaClass) {
+        this.javaClass = javaClass;
     }
 
     @JsonAnyGetter

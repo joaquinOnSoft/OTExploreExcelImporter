@@ -45,17 +45,8 @@ import com.opentext.explore.util.DateUtil;
  * @see https://www.callicoder.com/java-read-excel-file-apache-poi/ 
  * @author Joaquín Garzón
  */
-public class ExcelReader implements ITextDataReader{
-	private static final String SOLR_FIELD_REFERENCE_ID ="reference_id";
-	private static final String SOLR_FIELD_INTERACTION_ID = "interaction_id";
-	private static final String SOLR_FIELD_TITLE = "title";
-	private static final String SOLR_FIELD_AUTHOR_NAME = "author_name";
-	private static final String SOLR_FIELD_ID = "ID";
-	private static final String SOLR_FIELD_TYPE = "type";
-	private static final String SOLR_FIELD_PUBLISHED_DATE = "published_date";
-	private static final String SOLR_FIELD_DATE_TIME = "date_time";
-	private static final String SOLR_FIELD_CONTENT = "content";
-	
+public class ExcelReader implements ITextDataReader, ISolrFields{
+
 	protected static final Logger log = LogManager.getLogger(ExcelReader.class);
 
 	@Override

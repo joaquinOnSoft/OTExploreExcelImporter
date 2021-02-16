@@ -20,6 +20,11 @@
  */
 package com.opentext.explore.importer.excel.pojo;
 
+import java.util.HashMap;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -29,8 +34,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "excelName",
     "solrName",
     "type",
-    "format",
-    "skip"
+    "skip",
+    "format"
 })
 public class Field {
 
@@ -40,35 +45,12 @@ public class Field {
     private String solrName;
     @JsonProperty("type")
     private String type;
-    @JsonProperty("format")
-    private String format;        
     @JsonProperty("skip")
     private Boolean skip;
-
-    /**
-     * No args constructor for use in serialization
-     * 
-     */
-    public Field() {
-    }
-
-    /**
-     * 
-     * @param excelName
-     * @param skip
-     * @param solrName
-     * @param type
-     * @param format
-     * @param skip
-     */
-    public Field(String excelName, String solrName, String type, String format, Boolean skip) {
-        super();
-        this.excelName = excelName;
-        this.solrName = solrName;
-        this.type = type;
-        this.format = format;
-        this.skip = skip;
-    }
+    @JsonProperty("format")
+    private String format;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("excelName")
     public String getExcelName() {
@@ -99,18 +81,8 @@ public class Field {
     public void setType(String type) {
         this.type = type;
     }
-        
-    @JsonProperty("format")
-    public String getFormat() {
-		return format;
-	}
 
-    @JsonProperty("format")    
-	public void setFormat(String format) {
-		this.format = format;
-	}
-
-	@JsonProperty("skip")
+    @JsonProperty("skip")
     public Boolean getSkip() {
         return skip;
     }
@@ -118,5 +90,25 @@ public class Field {
     @JsonProperty("skip")
     public void setSkip(Boolean skip) {
         this.skip = skip;
+    }
+
+    @JsonProperty("format")
+    public String getFormat() {
+        return format;
+    }
+
+    @JsonProperty("format")
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 }

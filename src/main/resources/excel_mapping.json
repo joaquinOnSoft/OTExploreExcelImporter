@@ -9,16 +9,16 @@
 		{
 			"excelName": "FechaApertura",
 			"solrName": "published_date",
-			"type": "date",
-			"format": "MM/dd/yy",
-			"skip": false					
+			"type": "date",			
+			"skip": false,
+			"format": "MM/dd/yy"					
 		},
 		{
 			"excelName": "FechaCierre",
 			"solrName": "FechaCierre",
-			"type": "date",
-			"format": "MM/dd/yy",			
-			"skip": false					
+			"type": "date",					
+			"skip": false,
+			"format": "MM/dd/yy"								
 		},
 		{
 			"excelName": "EsContactar",
@@ -104,5 +104,17 @@
 			"type": "string",
 			"skip": false					
 		}																												
+	],
+	"fieldHandlers":[
+		{
+			"inputSolrNames": ["reference_id"],
+			"outputSolrNames": ["interaction_id", "ID"],
+			"javaClass": "com.opentext.explore.importer.excel.fieldhandlers.FieldHandlerCopy"
+		},
+		{
+			"inputSolrNames": ["content"],
+			"outputSolrNames": ["content", "ComentariosOficina"],
+			"javaClass": "com.opentext.explore.importer.excel.fieldhandlers.FieldHandlerConcat"
+		}		
 	]
 }
