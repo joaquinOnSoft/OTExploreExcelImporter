@@ -20,7 +20,7 @@
 package com.opentext.explore.importer.excel;
 
 public interface ISolrFields {
-	public static final String SOLR_FIELD_REFERENCE_ID ="reference_id";
+	public static final String SOLR_FIELD_REFERENCE_ID = "reference_id";
 	public static final String SOLR_FIELD_INTERACTION_ID = "interaction_id";
 	public static final String SOLR_FIELD_TITLE = "title";
 	public static final String SOLR_FIELD_AUTHOR_NAME = "author_name";

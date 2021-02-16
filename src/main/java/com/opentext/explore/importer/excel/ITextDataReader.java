@@ -27,6 +27,6 @@ import com.opentext.explore.importer.excel.pojo.TextDataImporterMapping;
 
 public interface ITextDataReader {
 	public List<TextData> read(String filePath, TextDataImporterMapping config);
-	
-	public List<TextData> read(File file, TextDataImporterMapping config);	
+
+	public List<TextData> read(File file, TextDataImporterMapping config);
 }

@@ -28,6 +28,7 @@ import com.opentext.explore.util.DateUtil;
 
 /**
  * Text data container (represents a row in an Excel or CSV file)
+ * 
  * @author Joaquín Garzón Peña
  */
 public class TextData {
@@ -41,7 +42,7 @@ public class TextData {
 	public Date dateTime;
 	public String content;
 	public Map<String, String> fields;
-	
+
 	public TextData() {
 		fields = new HashMap<String, String>();
 	}
@@ -49,68 +50,69 @@ public class TextData {
 	public String getReferenceId() {
 		return referenceId;
 	}
-	
+
 	public void setReferenceId(String referenceId) {
 		this.referenceId = referenceId;
 	}
-	
+
 	public String getInteractionId() {
 		return interactionId;
 	}
-	
+
 	public void setInteractionId(String interactionId) {
 		this.interactionId = interactionId;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
-	
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	public String getAuthorName() {
 		return authorName;
 	}
-	
+
 	public void setAuthorName(String authorName) {
 		this.authorName = authorName;
 	}
-	
+
 	public String getId() {
 		return id;
 	}
-	
+
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	public String getType() {
 		return type;
 	}
-	
+
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
 	public Date getPublishedDate() {
 		return publishedDate;
 	}
 
 	public String getPublishedDateAsString() {
 		return DateUtil.dateToUTC(publishedDate);
-	}	
-	
+	}
+
 	/**
 	 * Set the publication date
-	 * @param publishedDate - Publication date in UTC format 
+	 * 
+	 * @param publishedDate - Publication date in UTC format
 	 * @throws ParseException - If the date is not in UTC format
 	 */
-	public void setPublishedDate(String publishedDate) throws ParseException {		
+	public void setPublishedDate(String publishedDate) throws ParseException {
 		this.publishedDate = DateUtil.utcToDate(publishedDate);
-	}	
-	
+	}
+
 	public void setPublishedDate(Date publishedDate) {
 		this.publishedDate = publishedDate;
 	}
@@ -121,21 +123,22 @@ public class TextData {
 
 	public String getDateTimeAsString() {
 		return DateUtil.dateToUTC(dateTime);
-	}	
-	
+	}
+
 	public void setDateTime(Date dateTime) {
 		this.dateTime = dateTime;
 	}
 
 	/**
 	 * Set the publication date
-	 * @param publishedDate - Publication date in UTC format 
+	 * 
+	 * @param publishedDate - Publication date in UTC format
 	 * @throws ParseException - If the date is not in UTC format
-	 */	
+	 */
 	public void setDateTime(String dateTime) throws ParseException {
 		this.dateTime = DateUtil.utcToDate(dateTime);
-	}	
-	
+	}
+
 	public String getContent() {
 		return content;
 	}
@@ -154,5 +157,5 @@ public class TextData {
 
 	public String getField(String key) {
 		return fields.get(key);
-	}				
+	}
 }

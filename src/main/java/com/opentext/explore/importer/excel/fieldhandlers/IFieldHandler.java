@@ -24,5 +24,5 @@ import java.util.List;
 import com.opentext.explore.importer.excel.pojo.TextData;
 
 public interface IFieldHandler {
-	public TextData handle(TextData txtData, List<String>inputFields, List<String>outputFields);
+	public TextData handle(TextData txtData, List<String> inputFields, List<String> outputFields);
 }

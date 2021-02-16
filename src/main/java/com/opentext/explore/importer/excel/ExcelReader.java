@@ -43,25 +43,25 @@ import com.opentext.explore.importer.excel.pojo.TextData;
 import com.opentext.explore.importer.excel.pojo.TextDataImporterMapping;
 import com.opentext.explore.util.DateUtil;
 
-
 /**
- * Read excel files in Java using a very simple yet powerful open source library called Apache POI.
- * @see https://www.callicoder.com/java-read-excel-file-apache-poi/ 
+ * Read excel files in Java using a very simple yet powerful open source library
+ * called Apache POI.
+ * 
+ * @see https://www.callicoder.com/java-read-excel-file-apache-poi/
  * @author Joaquín Garzón
  */
-public class ExcelReader implements ITextDataReader, ISolrFields{
+public class ExcelReader implements ITextDataReader, ISolrFields {
 
 	protected static final Logger log = LogManager.getLogger(ExcelReader.class);
 
 	@Override
 	public List<TextData> read(String filePath, TextDataImporterMapping config) {
-		if(filePath != null) {
-			return read(new File(filePath), config);	
-		}
-		else {
+		if (filePath != null) {
+			return read(new File(filePath), config);
+		} else {
 			log.warn("File path was null");
 			return null;
-		}		
+		}
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class ExcelReader implements ITextDataReader, ISolrFields{
 
 		List<Field> fields = config.getFields();
 		Field field = null;
-		
+
 		String cellValue = null;
 
 		try {
@@ -79,8 +79,8 @@ public class ExcelReader implements ITextDataReader, ISolrFields{
 			Workbook workbook = WorkbookFactory.create(file);
 
 			// Create a DataFormatter to format and get each cell's value as String
-	        DataFormatter dataFormatter = new DataFormatter();			
-			
+			DataFormatter dataFormatter = new DataFormatter();
+
 			// Getting the Sheet at index zero
 			Sheet sheet = workbook.getSheetAt(0);
 
@@ -90,30 +90,29 @@ public class ExcelReader implements ITextDataReader, ISolrFields{
 			boolean allCellValuesInRowAreEmpty = true;
 			int column = 0;
 
-			for (Row row: sheet) {
-				if(firstRow) {
+			for (Row row : sheet) {
+				if (firstRow) {
 					log.debug("Skipping first row (header)");
 					firstRow = false;
 					continue;
 				}
-				
+
 				column = 0;
 				txtData = new TextData();
 				allCellValuesInRowAreEmpty = true;
 
-				for(Cell cell: row) {
+				for (Cell cell : row) {
 					field = fields.get(column);
 
-					if(field.getSkip()) {
+					if (field.getSkip()) {
 						log.info("Excel field " + field.getExcelName() + " skipped");
-					}
-					else {
+					} else {
 						cellValue = dataFormatter.formatCellValue(cell);
-						
-						if(cellValue != null && cellValue.compareTo("") != 0) {
+
+						if (cellValue != null && cellValue.compareTo("") != 0) {
 							allCellValuesInRowAreEmpty = false;
 						}
-												
+
 						switch (field.getSolrName()) {
 						case SOLR_FIELD_REFERENCE_ID:
 							txtData.setReferenceId(cellValue);
@@ -134,42 +133,43 @@ public class ExcelReader implements ITextDataReader, ISolrFields{
 							txtData.setType(cellValue);
 							break;
 						case SOLR_FIELD_PUBLISHED_DATE:
-							if(cellValue != null && cellValue.compareTo("") != 0) {
-								txtData.setPublishedDate(DateUtil.strToDate(cellValue, field.getFormat()));	
-							}							
+							if (cellValue != null && cellValue.compareTo("") != 0) {
+								txtData.setPublishedDate(DateUtil.strToDate(cellValue, field.getFormat()));
+							}
 							break;
 						case SOLR_FIELD_DATE_TIME:
-							if(cellValue != null && cellValue.compareTo("") != 0) {
-								txtData.setDateTime(DateUtil.strToDate(cellValue, field.getFormat()));	
-							}							
+							if (cellValue != null && cellValue.compareTo("") != 0) {
+								txtData.setDateTime(DateUtil.strToDate(cellValue, field.getFormat()));
+							}
 							break;
 						case SOLR_FIELD_CONTENT:
 							txtData.setContent(cellValue);
 							break;
 						default:
-							txtData.addField(field.getSolrName(), cellValue);							
+							txtData.addField(field.getSolrName(), cellValue);
 						}
 					}
 
-					column++;					
+					column++;
 				}
 
-				if(allCellValuesInRowAreEmpty == false) {
-					//Apply Field Handlers to Text Data (Excel or CSV row)
+				if (allCellValuesInRowAreEmpty == false) {
+					// Apply Field Handlers to Text Data (Excel or CSV row)
 					List<FieldHandler> fieldHandlers = config.getFieldHandlers();
-					if(fieldHandlers != null) {
-						for(FieldHandler fieldHandler: fieldHandlers) {
+					if (fieldHandlers != null) {
+						for (FieldHandler fieldHandler : fieldHandlers) {
 							IFieldHandler handler = instanciateFieldHandler(fieldHandler.getJavaClass());
-							txtData = handler.handle(txtData, fieldHandler.getInputSolrNames(), fieldHandler.getOutputSolrNames());
+							txtData = handler.handle(txtData, fieldHandler.getInputSolrNames(),
+									fieldHandler.getOutputSolrNames());
 						}
 					}
-					
-					textDataList.add(txtData);	
-				}				
+
+					textDataList.add(txtData);
+				}
 			}
-			
-	        // Closing the workbook
-	        workbook.close();			
+
+			// Closing the workbook
+			workbook.close();
 		} catch (EncryptedDocumentException | IOException e) {
 			log.error("Error reading excel file. ", e);
 		} catch (ParseException e) {
@@ -178,14 +178,14 @@ public class ExcelReader implements ITextDataReader, ISolrFields{
 
 		return textDataList;
 	}
-	
-	protected  IFieldHandler instanciateFieldHandler(String handlerName) {
+
+	protected IFieldHandler instanciateFieldHandler(String handlerName) {
 		IFieldHandler iFieldHandler = null;
-		
-		if(handlerName != null) {
+
+		if (handlerName != null) {
 			try {
 				Class<?> tClass = Class.forName(handlerName);
-				iFieldHandler = (IFieldHandler) tClass.getDeclaredConstructor().newInstance();				
+				iFieldHandler = (IFieldHandler) tClass.getDeclaredConstructor().newInstance();
 			} catch (ClassNotFoundException e) {
 				log.error("Transformer class not found: " + e.getLocalizedMessage());
 			} catch (NoSuchMethodException e) {
@@ -204,5 +204,5 @@ public class ExcelReader implements ITextDataReader, ISolrFields{
 		}
 
 		return iFieldHandler;
-	}	
+	}
 }

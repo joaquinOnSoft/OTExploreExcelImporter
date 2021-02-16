@@ -34,7 +34,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.opentext.explore.importer.excel.pojo.TextData;
-import com.opentext.explore.importer.reddit.RedditTransformer;
 import com.opentext.explore.util.DateUtil;
 
 import junit.framework.TestCase;

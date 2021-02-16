@@ -27,11 +27,11 @@ import org.apache.logging.log4j.Logger;
 import com.opentext.explore.importer.excel.ISolrFields;
 import com.opentext.explore.importer.excel.pojo.TextData;
 
-public abstract class AbstractFieldHandler implements IFieldHandler, ISolrFields{
+public abstract class AbstractFieldHandler implements IFieldHandler, ISolrFields {
 	protected static final Logger log = LogManager.getLogger(AbstractFieldHandler.class);
 
 	protected String getFieldValueByName(TextData txtData, String key) {
-		
+
 		switch (key) {
 		case SOLR_FIELD_REFERENCE_ID:
 			return txtData.getReferenceId();
@@ -42,23 +42,22 @@ public abstract class AbstractFieldHandler implements IFieldHandler, ISolrFields
 		case SOLR_FIELD_AUTHOR_NAME:
 			return txtData.getAuthorName();
 		case SOLR_FIELD_ID:
-			return txtData.getId();			
+			return txtData.getId();
 		case SOLR_FIELD_TYPE:
-			return txtData.getType();			
+			return txtData.getType();
 		case SOLR_FIELD_PUBLISHED_DATE:
-			return txtData.getPublishedDateAsString();			
+			return txtData.getPublishedDateAsString();
 		case SOLR_FIELD_DATE_TIME:
-			return txtData.getDateTimeAsString();			
+			return txtData.getDateTimeAsString();
 		case SOLR_FIELD_CONTENT:
-			return txtData.getContent();			
+			return txtData.getContent();
 		default:
-			return txtData.getField(key);				
+			return txtData.getField(key);
 		}
-	}	
-	
-	
+	}
+
 	protected TextData setFieldValueByName(TextData txtData, String key, String value) {
-	
+
 		switch (key) {
 		case SOLR_FIELD_REFERENCE_ID:
 			txtData.setReferenceId(value);
@@ -90,16 +89,16 @@ public abstract class AbstractFieldHandler implements IFieldHandler, ISolrFields
 				txtData.setDateTime(value);
 			} catch (ParseException e) {
 				log.error("setDateTime(). Invalid UTC date format: ", e);
-			}											
+			}
 			break;
 		case SOLR_FIELD_CONTENT:
 			txtData.setContent(value);
 			break;
 		default:
-			txtData.addField(key, value);	
+			txtData.addField(key, value);
 			break;
 		}
-		
+
 		return txtData;
 	}
 }

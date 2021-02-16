@@ -23,6 +23,7 @@ package com.opentext.explore.importer.excel.pojo;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -31,60 +32,56 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "inputSolrNames",
-    "outputSolrNames",
-    "javaClass"
-})
+@JsonPropertyOrder({ "inputSolrNames", "outputSolrNames", "javaClass" })
 public class FieldHandler {
 
-    @JsonProperty("inputSolrNames")
-    private List<String> inputSolrNames = null;
-    @JsonProperty("outputSolrNames")
-    private List<String> outputSolrNames = null;
-    @JsonProperty("javaClass")
-    private String javaClass;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	@JsonProperty("inputSolrNames")
+	private List<String> inputSolrNames = null;
+	@JsonProperty("outputSolrNames")
+	private List<String> outputSolrNames = null;
+	@JsonProperty("javaClass")
+	private String javaClass;
+	@JsonIgnore
+	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("inputSolrNames")
-    public List<String> getInputSolrNames() {
-        return inputSolrNames;
-    }
+	@JsonProperty("inputSolrNames")
+	public List<String> getInputSolrNames() {
+		return inputSolrNames;
+	}
 
-    @JsonProperty("inputSolrNames")
-    public void setInputSolrNames(List<String> inputSolrNames) {
-        this.inputSolrNames = inputSolrNames;
-    }
+	@JsonProperty("inputSolrNames")
+	public void setInputSolrNames(List<String> inputSolrNames) {
+		this.inputSolrNames = inputSolrNames;
+	}
 
-    @JsonProperty("outputSolrNames")
-    public List<String> getOutputSolrNames() {
-        return outputSolrNames;
-    }
+	@JsonProperty("outputSolrNames")
+	public List<String> getOutputSolrNames() {
+		return outputSolrNames;
+	}
 
-    @JsonProperty("outputSolrNames")
-    public void setOutputSolrNames(List<String> outputSolrNames) {
-        this.outputSolrNames = outputSolrNames;
-    }
+	@JsonProperty("outputSolrNames")
+	public void setOutputSolrNames(List<String> outputSolrNames) {
+		this.outputSolrNames = outputSolrNames;
+	}
 
-    @JsonProperty("javaClass")
-    public String getJavaClass() {
-        return javaClass;
-    }
+	@JsonProperty("javaClass")
+	public String getJavaClass() {
+		return javaClass;
+	}
 
-    @JsonProperty("javaClass")
-    public void setJavaClass(String javaClass) {
-        this.javaClass = javaClass;
-    }
+	@JsonProperty("javaClass")
+	public void setJavaClass(String javaClass) {
+		this.javaClass = javaClass;
+	}
 
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
+	@JsonAnyGetter
+	public Map<String, Object> getAdditionalProperties() {
+		return this.additionalProperties;
+	}
 
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
+	@JsonAnySetter
+	public void setAdditionalProperty(String name, Object value) {
+		this.additionalProperties.put(name, value);
+	}
 
 }

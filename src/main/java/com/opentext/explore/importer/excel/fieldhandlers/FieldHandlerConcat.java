@@ -27,21 +27,24 @@ public class FieldHandlerConcat extends AbstractFieldHandler {
 
 	/**
 	 * Concatenate the input fields values and assign the result to the output field
-	 * @param txtData - Text data container (represents a row in an Excel or CSV file)
-	 * @param inputFields - Input fields to be concatenated
-	 * @param outputFields - Output field where the concatenation value will be assigned
+	 * 
+	 * @param txtData      - Text data container (represents a row in an Excel or
+	 *                     CSV file)
+	 * @param inputFields  - Input fields to be concatenated
+	 * @param outputFields - Output field where the concatenation value will be
+	 *                     assigned
 	 */
 	@Override
 	public TextData handle(TextData txtData, List<String> inputFields, List<String> outputFields) {
 		StringBuilder strBuilder = new StringBuilder();
-		
-		for(String inputField: inputFields) {
-			
-			if(strBuilder.length() > 0) {
-				//Add separator between fields
+
+		for (String inputField : inputFields) {
+
+			if (strBuilder.length() > 0) {
+				// Add separator between fields
 				strBuilder.append(" ");
 			}
-			
+
 			switch (inputField) {
 			case SOLR_FIELD_REFERENCE_ID:
 				strBuilder.append(txtData.getReferenceId());
@@ -65,21 +68,21 @@ public class FieldHandlerConcat extends AbstractFieldHandler {
 				strBuilder.append(txtData.getPublishedDate());
 				break;
 			case SOLR_FIELD_DATE_TIME:
-				strBuilder.append(txtData.getDateTime());											
+				strBuilder.append(txtData.getDateTime());
 				break;
 			case SOLR_FIELD_CONTENT:
 				strBuilder.append(txtData.getContent());
 				break;
 			default:
-				strBuilder.append(txtData.getField(inputField));											
+				strBuilder.append(txtData.getField(inputField));
 			}
 		}
-		
-		for(String outputField: outputFields) {
+
+		for (String outputField : outputFields) {
 			log.debug("Setting field '" + outputField + "'  value: " + strBuilder.toString());
-			txtData = setFieldValueByName(txtData, outputField, strBuilder.toString()); 
+			txtData = setFieldValueByName(txtData, outputField, strBuilder.toString());
 		}
-		
+
 		return txtData;
 	}
 }

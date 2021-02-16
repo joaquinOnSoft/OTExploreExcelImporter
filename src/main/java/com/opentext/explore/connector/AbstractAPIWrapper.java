@@ -18,6 +18,7 @@
  *
  */
 package com.opentext.explore.connector;
+
 import java.io.IOException;
 
 import org.apache.http.HttpEntity;
@@ -47,6 +48,7 @@ public abstract class AbstractAPIWrapper {
 	/**
 	 * SEE: Apache HttpClient Examples
 	 * https://mkyong.com/java/apache-httpclient-examples/
+	 * 
 	 * @param request
 	 * @return
 	 */
@@ -55,15 +57,15 @@ public abstract class AbstractAPIWrapper {
 		CloseableHttpResponse response = null;
 
 		CloseableHttpClient httpClient = HttpClients.createDefault();
-				
-		try {			
+
+		try {
 			response = httpClient.execute(request);
 
 			// Get HttpResponse Status
-			log.debug(response.getProtocolVersion());              // HTTP/1.1
-			log.debug(response.getStatusLine().getStatusCode());   // 200
+			log.debug(response.getProtocolVersion()); // HTTP/1.1
+			log.debug(response.getStatusLine().getStatusCode()); // 200
 			log.debug(response.getStatusLine().getReasonPhrase()); // OK
-			log.debug(response.getStatusLine().toString());        // HTTP/1.1 200 OK
+			log.debug(response.getStatusLine().toString()); // HTTP/1.1 200 OK
 
 			HttpEntity entity = response.getEntity();
 			if (entity != null) {
@@ -72,37 +74,32 @@ public abstract class AbstractAPIWrapper {
 				log.info(result);
 			}
 
-		} 
-		catch (IOException e) {
+		} catch (IOException e) {
 			log.error(e.toString());
-		}
-		finally {
+		} finally {
 			try {
-				if(response != null) {
+				if (response != null) {
 					response.close();
 				}
 				httpClient.close();
-			}
-			catch(IOException e) {
-				log.error(e.toString());				
+			} catch (IOException e) {
+				log.error(e.toString());
 			}
 		}
 
 		return result;
 	}
 
-
 	protected Object jsonStringToObject(String json, Class<?> toClass) {
-		if(json == null) {
-			return null;	
-		}
-		else {		
+		if (json == null) {
+			return null;
+		} else {
 			// Jackson 2 – Convert Java Object to / from JSON
 			// https://www.mkyong.com/java/jackson-2-convert-java-object-to-from-json/
 			Object obj = null;
 
 			ObjectMapper mapper = new ObjectMapper();
-			//JSON string to Java Object
+			// JSON string to Java Object
 			try {
 				obj = mapper.readValue(json.toString(), toClass);
 			} catch (IOException e) {

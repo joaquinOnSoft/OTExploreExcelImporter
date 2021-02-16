@@ -28,16 +28,16 @@ public class FieldHandlerCopy extends AbstractFieldHandler {
 	@Override
 	public TextData handle(TextData txtData, List<String> inputFields, List<String> outputFields) {
 		String value = null;
-		
-		if(inputFields != null && inputFields.size() > 0) {
-			value= getFieldValueByName(txtData, inputFields.get(0));
+
+		if (inputFields != null && inputFields.size() > 0) {
+			value = getFieldValueByName(txtData, inputFields.get(0));
 		}
-				
-		for(String outputField: outputFields) {
+
+		for (String outputField : outputFields) {
 			log.debug("Copying field '" + outputField + "'  value: " + value);
-			txtData = setFieldValueByName(txtData, outputField, value); 
+			txtData = setFieldValueByName(txtData, outputField, value);
 		}
-		
+
 		return txtData;
 	}
 
