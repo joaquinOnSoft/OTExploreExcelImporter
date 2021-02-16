@@ -59,8 +59,8 @@ public class ExcelTransformer extends AbstractTransformer {
 				eDoc.addContent(createElementField("author_name", txtData.getAuthorName()));
 				eDoc.addContent(createElementField("ID", txtData.getId()));
 				eDoc.addContent(createElementField("type", txtData.getType()));	
-				eDoc.addContent(createElementField("published_date", txtData.getPublishedDate()));
-				eDoc.addContent(createElementField("date_time", txtData.getDateTime()));
+				eDoc.addContent(createElementField("published_date", txtData.getPublishedDateAsString()));
+				eDoc.addContent(createElementField("date_time", txtData.getDateTimeAsString()));
 				eDoc.addContent(createElementField("content", new CDATA(txtData.getContent())));				
 
 				

@@ -1,24 +1,15 @@
 package com.opentext.explore.importer.excel;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jdom2.Document;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
 
 import com.opentext.explore.connector.SolrAPIWrapper;
 import com.opentext.explore.importer.excel.pojo.TextData;
 import com.opentext.explore.util.FileUtil;
-
-import net.dean.jraw.models.Listing;
-import net.dean.jraw.models.Submission;
 
 public class ExcelImporter {
 	/** Solr URL (this Solr instance is used by Explore) */
@@ -39,7 +30,7 @@ public class ExcelImporter {
 	 * method provided by Solr in order to insert new content
 	 * @param tag - Excel Importer tag (used to filter content in Explore)
 	 * @param txtDatas - List of Text Data (Excel or CSV row)
-	 * @return true if the insertion in Solr was ok, false in other case. 
+	 * @return true if the insertion in Solr was OK, false in other case. 
 	 */
 	protected boolean solrBatchUpdate(String tag, List<TextData> txtDatas) {
 		boolean updated = true;
@@ -68,6 +59,5 @@ public class ExcelImporter {
 		}
 		
 		return updated;
-	}
-	
+	}	
 }

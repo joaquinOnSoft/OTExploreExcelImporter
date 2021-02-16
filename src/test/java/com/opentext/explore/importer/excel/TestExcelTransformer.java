@@ -22,6 +22,8 @@ package com.opentext.explore.importer.excel;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -32,6 +34,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.opentext.explore.importer.excel.pojo.TextData;
+import com.opentext.explore.importer.reddit.RedditTransformer;
 import com.opentext.explore.util.DateUtil;
 
 import junit.framework.TestCase;
@@ -50,6 +53,7 @@ public class TestExcelTransformer extends TestCase {
 			"    <field name=\"ID\"><![CDATA[1583916]]></field>\r\n" +
 			"    <field name=\"type\"><![CDATA[Ticketing]]></field>\r\n" +
 			"    <field name=\"published_date\"><![CDATA[2020-12-01T00:00:00Z]]></field>\r\n" +
+			"    <field name=\"date_time\"><![CDATA[2020-12-01T00:00:00Z]]></field>\r\n" +
 			"    <field name=\"content\"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer finibus leo purus, quis porttitor quam aliquet ut. Curabitur ullamcorper erat at facilisis luctus. Nunc facilisis interdum vestibulum. Nulla auctor ante sed purus scelerisque, tincidunt sollicitudin erat vulputate. Nam risus massa, ullamcorper a aliquam at, blandit in ante. Nam vestibulum, metus eu lacinia fermentum, felis massa venenatis leo, in ornare nibh eros eu odio. Ut sit amet egestas enim. Quisque justo urna, porttitor sed condimentum vitae, malesuada quis arcu. Donec eget lacinia lacus. Duis sagittis id nisl eget porttitor. Aliquam interdum vel ipsum ut blandit. Fusce sed eros a mi tincidunt malesuada.]]></field>\r\n" +
 			"    <field name=\"EsContactar\"><![CDATA[S]]></field>\r\n" +
 			"    <field name=\"ComentariosOficina\"><![CDATA[Fusce lobortis massa at volutpat vulputate. Praesent vulputate quam vel turpis pharetra, dignissim sodales leo lobortis. Etiam diam ex, mollis eu fringilla eget, finibus at lorem. Vivamus posuere neque magna, sodales maximus ligula placerat eu. Maecenas diam orci, viverra vitae aliquam id, egestas et lorem. Sed ut ultricies eros, id ullamcorper urna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse ac mauris vel metus porta faucibus. Sed gravida est sit amet sapien venenatis, at fermentum lacus bibendum. Nullam quis magna et augue tempor semper sit amet eu nulla. Sed at elementum sapien. Sed lacinia vulputate mi. Sed metus risus, mattis vel vehicula ut, pellentesque vel dui.]]></field>\r\n" +
@@ -77,7 +81,8 @@ public class TestExcelTransformer extends TestCase {
 		when(txtData.getAuthorName()).thenReturn("ExcelImporter");
 		when(txtData.getTitle()).thenReturn("1583916 Quejas de siniestros/prestaciones");
 		when(txtData.getType()).thenReturn("Ticketing");
-		//when(txtData.getPublishedDate()).thenReturn("2020-12-01T00:00:00Z");	
+		when(txtData.getPublishedDateAsString()).thenReturn("2020-12-01T00:00:00Z");	
+		when(txtData.getDateTimeAsString()).thenReturn("2020-12-01T00:00:00Z");
 		when(txtData.getContent()).thenReturn("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer finibus leo purus, quis porttitor quam aliquet ut. Curabitur ullamcorper erat at facilisis luctus. Nunc facilisis interdum vestibulum. Nulla auctor ante sed purus scelerisque, tincidunt sollicitudin erat vulputate. Nam risus massa, ullamcorper a aliquam at, blandit in ante. Nam vestibulum, metus eu lacinia fermentum, felis massa venenatis leo, in ornare nibh eros eu odio. Ut sit amet egestas enim. Quisque justo urna, porttitor sed condimentum vitae, malesuada quis arcu. Donec eget lacinia lacus. Duis sagittis id nisl eget porttitor. Aliquam interdum vel ipsum ut blandit. Fusce sed eros a mi tincidunt malesuada.");	
 		try {
 			when(txtData.getPublishedDate()).thenReturn(DateUtil.utcToDate("2020-12-01T00:00:00Z"));
@@ -121,15 +126,20 @@ public class TestExcelTransformer extends TestCase {
 		assertEquals(expectedXML, xml);
 	}
 	
-	/*
-	 * @Test public void testStatusToXMLFile() { String outputXML =
-	 * "test_h10u12.xml";
-	 * 
-	 * try { RedditTransformer.submissionsToXMLFile(posts, outputXML,
-	 * "Canada Post"); } catch (IOException e) { fail(e.getMessage()); }
-	 * 
-	 * File xml = new File(outputXML); assertTrue(xml.exists());
-	 * 
-	 * //Remove test XML xml.delete(); }
-	 */
+	@Test 
+	public void testStatusToXMLFile() {
+		String outputXML = "test_h10u12.xml";
+				
+		try {
+			ExcelTransformer.textDatasToXMLFile(txtDatas, outputXML, "Insurance");
+		} catch (IOException e) {
+			fail(e.getMessage());
+		}
+		
+		File xml = new File(outputXML);
+		assertTrue(xml.exists());
+		
+		//Remove test XML
+		xml.delete();
+	}
 }
