@@ -13,6 +13,12 @@ public class TestFieldHandlerCopy extends AbstractTestFieldHandler {
 		String value = fhCopy.getFieldValueByName(txtData, "reference_id");
 		
 		assertEquals("1583916", value);
+		
+		value = fhCopy.getFieldValueByName(txtData, "interaction_id");		
+		assertEquals("1583916", value);
+		
+		value = fhCopy.getFieldValueByName(txtData, "ID");		
+		assertEquals("1583916", value);				
 	}	
 
 	@Test

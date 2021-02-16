@@ -21,6 +21,7 @@ package com.opentext.explore.importer.excel;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,10 +36,13 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
+import com.opentext.explore.importer.excel.fieldhandlers.IFieldHandler;
 import com.opentext.explore.importer.excel.pojo.Field;
+import com.opentext.explore.importer.excel.pojo.FieldHandler;
 import com.opentext.explore.importer.excel.pojo.TextData;
 import com.opentext.explore.importer.excel.pojo.TextDataImporterMapping;
 import com.opentext.explore.util.DateUtil;
+
 
 /**
  * Read excel files in Java using a very simple yet powerful open source library called Apache POI.
@@ -151,6 +155,15 @@ public class ExcelReader implements ITextDataReader, ISolrFields{
 				}
 
 				if(allCellValuesInRowAreEmpty == false) {
+					//Apply Field Handlers to Text Data (Excel or CSV row)
+					List<FieldHandler> fieldHandlers = config.getFieldHandlers();
+					if(fieldHandlers != null) {
+						for(FieldHandler fieldHandler: fieldHandlers) {
+							IFieldHandler handler = instanciateFieldHandler(fieldHandler.getJavaClass());
+							txtData = handler.handle(txtData, fieldHandler.getInputSolrNames(), fieldHandler.getOutputSolrNames());
+						}
+					}
+					
 					textDataList.add(txtData);	
 				}				
 			}
@@ -165,4 +178,31 @@ public class ExcelReader implements ITextDataReader, ISolrFields{
 
 		return textDataList;
 	}
+	
+	protected  IFieldHandler instanciateFieldHandler(String handlerName) {
+		IFieldHandler iFieldHandler = null;
+		
+		if(handlerName != null) {
+			try {
+				Class<?> tClass = Class.forName(handlerName);
+				iFieldHandler = (IFieldHandler) tClass.getDeclaredConstructor().newInstance();				
+			} catch (ClassNotFoundException e) {
+				log.error("Transformer class not found: " + e.getLocalizedMessage());
+			} catch (NoSuchMethodException e) {
+				log.error("Not 'transform' method in Transformer class: " + e.getLocalizedMessage());
+			} catch (SecurityException e) {
+				log.error("Invalid Transformer (1): " + e.getLocalizedMessage());
+			} catch (InstantiationException e) {
+				log.error("Invalid Transformer (2): " + e.getLocalizedMessage());
+			} catch (IllegalAccessException e) {
+				log.error("Invalid Transformer (3): " + e.getLocalizedMessage());
+			} catch (IllegalArgumentException e) {
+				log.error("Invalid Transformer (4): " + e.getLocalizedMessage());
+			} catch (InvocationTargetException e) {
+				log.error("Invalid Transformer (5): " + e.getLocalizedMessage());
+			}
+		}
+
+		return iFieldHandler;
+	}	
 }

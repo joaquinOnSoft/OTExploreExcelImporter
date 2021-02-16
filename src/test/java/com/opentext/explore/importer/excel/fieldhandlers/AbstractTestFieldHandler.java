@@ -20,6 +20,8 @@ public abstract class AbstractTestFieldHandler extends TestCase {
 	protected void setUp() {
 		txtData = new TextData();
 		txtData.setReferenceId("1583916");
+		txtData.setInteractionId("1583916");
+		txtData.setId("1583916");
 		txtData.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
 		txtData.addField("ComentariosOficina", "Integer finibus leo purus, quis porttitor quam aliquet ut.");
 	}

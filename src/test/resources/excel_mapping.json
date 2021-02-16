@@ -112,9 +112,14 @@
 			"javaClass": "com.opentext.explore.importer.excel.fieldhandlers.FieldHandlerCopy"
 		},
 		{
-			"inputSolrNames": ["content"],
-			"outputSolrNames": ["content", "ComentariosOficina"],
+			"inputSolrNames": ["content", "ComentariosOficina"],
+			"outputSolrNames": ["content"],
 			"javaClass": "com.opentext.explore.importer.excel.fieldhandlers.FieldHandlerConcat"
-		}		
+		},
+		{
+			"inputSolrNames": ["reference_id", "Producto", "TipoPeticion"],
+			"outputSolrNames": ["title"],
+			"javaClass": "com.opentext.explore.importer.excel.fieldhandlers.FieldHandlerConcat"
+		}
 	]
 }
