@@ -47,17 +47,20 @@ Each *field* supports theses properties:
  * **excelName**: Excel column name
  * **solrName**: Solr field name
 
-> [!NOTE]
+
+> These are the key Solr fields that must be mapped in order to import the information into Explore:
+> 
+> - **reference_id**: Reference identifier 
+> - **interaction_id**: Interaction identifier
+> - **title**: Interaction title
+> - **author_name**: Author name (usually an Explore user)
+> - **ID**: Identifier
+> - **type**: Content type. You can reuse pre-existing types or you can create your own
+> - **published_date**: Interactio's publication date
+> - **date_time**:  Interactio's creation date
+> - **content**: Interaction content (call transcription, Twitter message, e-mail...)
 >
-> **reference_id** - Referenece identifier
-> **interaction_id** -
-> **title** -
-> **author_name** -
-> **ID** -
-> **type** -
-> **published_date** -
-> **date_time** -
-> **content** -
+> You can reference your owns Solr fields. It will require additional configuration on Explore
     
  * **type**: Data type. Supported values: integer, string, date
  * **skip**: Flag to indicate that this file must be ignored or not. Valid values: true, false
