@@ -41,7 +41,8 @@ Configuration file that define the mapping between excel fields and Solr fields:
 There are two main section on the configuration file: 
    * **fields**: Define the mapping between an excel field and a Solr field
    * **fieldHandlers**: Define which field handler must be used to set a specific Solr field
-      
+
+### Fields      
 Each *field* supports theses properties:
 
  * **excelName**: Excel column name
@@ -66,6 +67,17 @@ Each *field* supports theses properties:
  * **skip**: Flag to indicate that this file must be ignored or not. Valid values: true, false
  * **format**: (Optional) Date format to apply on a data fields. [Check valid formats](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html)
 
+### Field Handlers
+
+Field Handlers are classes that extends *com.opentext.explore.importer.excel.fieldhandlers.AbstractFieldHandler* and set a Solr field based on a information contained in a given Excel row.
+
+#### com.opentext.explore.importer.excel.fieldhandlers.FieldHandlerConcat
+Concatenate the value of the input fields and assign the value to the output fields.
+
+#### com.opentext.explore.importer.excel.fieldhandlers.FieldHandlerCopy
+Copy the value of the 1st input field and assign the value to all the output fields.
+
+### Configuration example
 This **excel_mapping.json** file shows an example: 
 
 ```json
