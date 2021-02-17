@@ -16,10 +16,10 @@ This utility is distributed as a runnable .jar file.
 These are the accepted parameters:
 
 usage: java -jar OTExploreExcelImporter-21.1.jar
- * -h, --host			(Optional)		Solr host URL (used by OpenText Explore). Default value: http://localhost:8983
- * -t, --tag			(Optional)		Explore Importer tag. Added to each article importer. Default value: "Excel Importer"
- * -e, --excel			(Mandatory)		Excel file to be imported  
- * -c, --config			(Mandatory)		JSON file that defines the mapping between excel columns and Solr fields
+ - **-h, --host**			(Optional)		Solr host URL (used by OpenText Explore). Default value: http://localhost:8983
+ - **-t, --tag**			(Optional)		Explore Importer tag. Added to each article importer. Default value: "Excel Importer"
+ - **-e, --excel**			(Mandatory)		Excel file to be imported  
+ - **-c, --config**			(Mandatory)		JSON file that defines the mapping between excel columns and Solr fields
 
 ### Examples of invocation
 
@@ -70,6 +70,12 @@ Each *field* supports theses properties:
 ### Field Handlers
 
 Field Handlers are classes that extends *com.opentext.explore.importer.excel.fieldhandlers.AbstractFieldHandler* and set a Solr field based on a information contained in a given Excel row.
+
+Each *fieldHanler* supports theses properties:
+
+ * **inputSolrNames**: List of solr field names used as **INPUT** fields
+ * **outputSolrNames**: List of solr field names used as **OUTPUT** fields
+ * **javaClass**: class that extends *com.opentext.explore.importer.excel.fieldhandlers.AbstractFieldHandler* 
 
 #### com.opentext.explore.importer.excel.fieldhandlers.FieldHandlerConcat
 Concatenate the value of the input fields and assign the value to the output fields.
@@ -209,6 +215,3 @@ This **excel_mapping.json** file shows an example:
 }
 ```
 
-### Solr fields to have in mind
-
-These are the key Solr fields that must be mapped in order to import the information into Explore:
