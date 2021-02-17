@@ -38,6 +38,7 @@ public class ExcelImporter {
 			List<TextData> txtDatas = excelReader.read(excelPaht, mapping);
 			
 			if(txtDatas != null && txtDatas.size() > 0) {
+				log.debug(txtDatas.size() + " excel rows readed");
 				log.debug("Calling Solr method: /solr/interaction/otcaBatchUpdate ");
 				solrBatchUpdate(tag, txtDatas);
 			}
