@@ -46,16 +46,18 @@ Each *field* supports theses properties:
 
  * **excelName**: Excel column name
  * **solrName**: Solr field name
- 
->    **reference_id** - Referenece identifier
->    interaction_id
->    title
->    author_name
->    ID
->    type
->    published_date
->    date_time
->    content
+
+> [!NOTE]
+>
+> **reference_id** - Referenece identifier
+> **interaction_id** -
+> **title** -
+> **author_name** -
+> **ID** -
+> **type** -
+> **published_date** -
+> **date_time** -
+> **content** -
     
  * **type**: Data type. Supported values: integer, string, date
  * **skip**: Flag to indicate that this file must be ignored or not. Valid values: true, false
