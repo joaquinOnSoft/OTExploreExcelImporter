@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.opentext.explore.connector.SolrAPIWrapper;
 import com.opentext.explore.importer.excel.pojo.TextData;
+import com.opentext.explore.importer.excel.pojo.TextDataImporterMapping;
 import com.opentext.explore.util.FileUtil;
 
 public class ExcelImporter {
@@ -23,6 +24,24 @@ public class ExcelImporter {
 	 */
 	public ExcelImporter(String host) {
 		this.host = host;
+	}
+	
+	
+	public void start(String excelPaht, String configPath, String tag) {
+		log.debug("Reading config file: " + configPath);
+		JSonMappingConfigReader configReader = new JSonMappingConfigReader();
+		TextDataImporterMapping mapping = configReader.read(configPath);
+		
+		if(mapping != null) {
+			log.debug("Reading Excel file: " + excelPaht);
+			ExcelReader excelReader = new ExcelReader();
+			List<TextData> txtDatas = excelReader.read(excelPaht, mapping);
+			
+			if(txtDatas != null && txtDatas.size() > 0) {
+				log.debug("Calling Solr method: /solr/interaction/otcaBatchUpdate ");
+				solrBatchUpdate(tag, txtDatas);
+			}
+		}
 	}
 
 	/**
@@ -41,7 +60,8 @@ public class ExcelImporter {
 		try {
 
 			xmlPath = ExcelTransformer.textDatasToXMLFile(txtDatas, xmlFileName, tag);
-
+			log.debug("Temp XML file generated: " + xmlPath);
+			
 			SolrAPIWrapper wrapper = null;
 			if (host == null)
 				wrapper = new SolrAPIWrapper();
@@ -54,6 +74,7 @@ public class ExcelImporter {
 			updated = false;
 		} finally {
 			if (xmlPath != null) {
+				log.debug("Removing temp XML: " + xmlPath);
 				FileUtil.deleteFile(xmlPath);
 			}
 		}
