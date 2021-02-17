@@ -58,7 +58,7 @@ public class ExcelImporterLauncher {
 			if (cmd.hasOption("excel") || cmd.hasOption("e")) {
 				excelPath = cmd.getOptionValue("excel");
 				
-				if(!fileExists(configPath)) {
+				if(!fileExists(excelPath)) {
 					exitInError(excelPath + " is not a file.");
 				}
 				

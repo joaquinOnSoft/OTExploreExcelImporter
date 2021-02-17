@@ -70,6 +70,6 @@ public abstract class AbstractTransformer {
 	}
 
 	private static String ignoreUnicodeGarbage(String str) {
-		return str.replace("", "");
+		return str == null? null: str.replace("", "");
 	}
 }
