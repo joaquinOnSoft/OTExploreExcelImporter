@@ -24,6 +24,7 @@ public interface ISolrFields {
 	public static final String SOLR_FIELD_INTERACTION_ID = "interaction_id";
 	public static final String SOLR_FIELD_TITLE = "title";
 	public static final String SOLR_FIELD_AUTHOR_NAME = "author_name";
+	public static final String SOLR_FIELD_GROUP_HIERARCHY = "Group_Hierarchy";
 	public static final String SOLR_FIELD_ID = "ID";
 	public static final String SOLR_FIELD_TYPE = "type";
 	public static final String SOLR_FIELD_PUBLISHED_DATE = "published_date";

@@ -58,6 +58,9 @@ public class FieldHandlerConcat extends AbstractFieldHandler {
 			case SOLR_FIELD_AUTHOR_NAME:
 				strBuilder.append(txtData.getAuthorName());
 				break;
+			case SOLR_FIELD_GROUP_HIERARCHY:
+				strBuilder.append(txtData.getGroupHierarchy());
+				break;				
 			case SOLR_FIELD_ID:
 				strBuilder.append(txtData.getId());
 				break;

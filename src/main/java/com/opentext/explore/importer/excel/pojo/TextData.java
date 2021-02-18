@@ -36,6 +36,7 @@ public class TextData {
 	public String interactionId;
 	public String title;
 	public String authorName;
+	public String groupHierarchy;
 	public String id;
 	public String type;
 	public Date publishedDate;
@@ -77,6 +78,14 @@ public class TextData {
 
 	public void setAuthorName(String authorName) {
 		this.authorName = authorName;
+	}
+
+	public String getGroupHierarchy() {
+		return groupHierarchy;
+	}
+
+	public void setGroupHierarchy(String groupHierarchy) {
+		this.groupHierarchy = groupHierarchy;
 	}
 
 	public String getId() {

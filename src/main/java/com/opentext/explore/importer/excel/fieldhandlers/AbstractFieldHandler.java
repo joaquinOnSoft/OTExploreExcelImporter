@@ -41,6 +41,8 @@ public abstract class AbstractFieldHandler implements IFieldHandler, ISolrFields
 			return txtData.getTitle();
 		case SOLR_FIELD_AUTHOR_NAME:
 			return txtData.getAuthorName();
+		case SOLR_FIELD_GROUP_HIERARCHY:
+			return txtData.getGroupHierarchy();			
 		case SOLR_FIELD_ID:
 			return txtData.getId();
 		case SOLR_FIELD_TYPE:
@@ -71,6 +73,9 @@ public abstract class AbstractFieldHandler implements IFieldHandler, ISolrFields
 		case SOLR_FIELD_AUTHOR_NAME:
 			txtData.setAuthorName(value);
 			break;
+		case SOLR_FIELD_GROUP_HIERARCHY:
+			txtData.setGroupHierarchy(value);
+			break;			
 		case SOLR_FIELD_ID:
 			txtData.setId(value);
 			break;

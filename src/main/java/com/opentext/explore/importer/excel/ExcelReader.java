@@ -126,6 +126,9 @@ public class ExcelReader implements ITextDataReader, ISolrFields {
 						case SOLR_FIELD_AUTHOR_NAME:
 							txtData.setAuthorName(cellValue);
 							break;
+						case SOLR_FIELD_GROUP_HIERARCHY:
+							txtData.setGroupHierarchy(cellValue);
+							break;							
 						case SOLR_FIELD_ID:
 							txtData.setId(cellValue);
 							break;

@@ -83,6 +83,9 @@ Concatenate the value of the input fields and assign the value to the output fie
 #### com.opentext.explore.importer.excel.fieldhandlers.FieldHandlerCopy
 Copy the value of the 1st input field and assign the value to all the output fields.
 
+#### com.opentext.explore.importer.excel.fieldhandlers.FieldHandlerRandomTeamMember
+Choose a team member name, randomly, from a predefined list of 8 users (team members)
+
 ### Configuration example
 This **excel_mapping.json** file shows an example: 
 
@@ -214,4 +217,73 @@ This **excel_mapping.json** file shows an example:
 	]
 }
 ```
+## schema.xml (Solr)
+The Solr configuration file schema.xml is located at <SOLR_HOME>\solr-7.3.1\server\solr\configsets\interaction_config e.g.
 
+> D:\SolrCloud\solr-7.3.1\server\solr\configsets\interaction_config
+
+### Adding configuration to manage text in Spanish
+
+Add the following sections just before the &lt;field name="language"&gt; and *&lt;/schema&gt;* tags:
+
+```xml
+<schema name="default-config" version="1.6">
+
+   ...
+
+   <field name="es_title" type="es_explore_text" indexed="true" stored="true" />
+   <field name="es_content" type="es_explore_text" indexed="true" stored="true" />
+   <field name="es_content_1" type="es_explore_text" indexed="true" stored="true" />
+   <field name="es_content_2" type="es_explore_text" indexed="true" stored="true" />
+   <dynamicField name="es_survey_answer_text_*" type="es_explore_text" indexed="false" stored="true" />
+   <field name="es_survey_answer_text" type="es_explore_text" indexed="true" stored="true" multiValued="true" />
+   
+   <field name="es_search_fields" type="es_explore_text" indexed="true" stored="false" multiValued="true" />
+   <copyField source="es_content_1" dest="es_search_fields" />
+   <copyField source="es_content_2" dest="es_search_fields" />
+   <copyField source="es_content" dest="es_search_fields" />
+   <copyField source="es_title" dest="es_search_fields" />
+   <copyField source="es_survey_answer_text_*" dest="es_search_fields" />
+   
+   <field name="es_tf_search_fields" type="es_explore_terms_text" indexed="true" stored="false" multiValued="true" />
+   <copyField source="es_content_1" dest="es_tf_search_fields" />
+   <copyField source="es_content_2" dest="es_tf_search_fields" />
+   <copyField source="es_content" dest="es_tf_search_fields" />
+   <copyField source="es_title" dest="es_tf_search_fields" />
+   <copyField source="es_survey_answer_text_*" dest="es_tf_search_fields" />
+   
+   <field name="language" type="string" indexed="true" stored="false" docValues="true" />
+   
+   ...
+   
+   <fieldType name="es_explore_text" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+         <tokenizer class="solr.StandardTokenizerFactory" />
+         <filter class="solr.LowerCaseFilterFactory" />
+         <filter class="solr.StopFilterFactory" ignoreCase="true" words="lang/stopwords_es.txt" format="snowball" />
+         <!--filter class="solr.GermanNormalizationFilterFactory"/ -->
+         <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt" />
+         <filter class="solr.SpanishLightStemFilterFactory" />
+         <!-- more aggressive: <filter class="solr.SnowballPorterFilterFactory" language="Spanish"/> -->
+      </analyzer>
+   </fieldType>
+   <fieldType name="es_explore_terms_text" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+         <tokenizer class="solr.StandardTokenizerFactory" />
+         <filter class="solr.LowerCaseFilterFactory" />
+         <filter class="solr.StopFilterFactory" ignoreCase="true" words="lang/stopwords_es.txt" format="snowball" />
+         <!--filter class="solr.GermanNormalizationFilterFactory"/ -->
+      </analyzer>
+   </fieldType>
+   <!-- Similarity is the scoring routine for each document vs. a query.
+	       A custom Similarity or SimilarityFactory may be specified here, but 
+	       the default is fine for most applications.  
+	       For more info: http://lucene.apache.org/solr/guide/other-schema-elements.html#OtherSchemaElements-Similarity
+   -->
+   <!--
+	     <similarity class="com.example.solr.CustomSimilarityFactory">
+	       <str name="paramkey">param value</str>
+	     </similarity>
+   -->
+</schema>
+``` 

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Explore>
+  <DocTypes>
+    <DocType>
+      <name><![CDATA[Ticket]]></name>
+      <GridFields>
+        <Field column="Source">
+          <name><![CDATA[reference  id]]></name>
+          <tag><![CDATA[reference_id]]></tag>
+        </Field>
+        <Field column="Source">
+          <name><![CDATA[published  date]]></name>
+          <tag><![CDATA[published_date]]></tag>
+        </Field>
+        <Field column="Source">
+          <name><![CDATA[Fecha Cierre]]></name>
+          <tag><![CDATA[FechaCierre]]></tag>
+        </Field>
+        <Field column="Source">
+          <name><![CDATA[Es Contactar]]></name>
+          <tag><![CDATA[EsContactar]]></tag>
+        </Field>
+        <Field column="Source">
+          <name><![CDATA[CPI]]></name>
+          <tag><![CDATA[CPI]]></tag>
+        </Field>
+        <Field column="Source">
+          <name><![CDATA[Producto]]></name>
+          <tag><![CDATA[Producto]]></tag>
+        </Field>
+        <Field column="Source">
+          <name><![CDATA[Tipo Peticion]]></name>
+          <tag><![CDATA[TipoPeticion]]></tag>
+        </Field>
+        <Field column="Source">
+          <name><![CDATA[content]]></name>
+          <tag><![CDATA[content]]></tag>
+        </Field>
+        <Field column="Source">
+          <name><![CDATA[Comentarios Oficina]]></name>
+          <tag><![CDATA[ComentariosOficina]]></tag>
+        </Field>
+        <Field column="Source">
+          <name><![CDATA[Departamento]]></name>
+          <tag><![CDATA[Departamento]]></tag>
+        </Field>
+        <Field column="Source">
+          <name><![CDATA[Estado]]></name>
+          <tag><![CDATA[Estado]]></tag>
+        </Field>
+        <Field column="Source">
+          <name><![CDATA[Familia]]></name>
+          <tag><![CDATA[Familia]]></tag>
+        </Field>
+        <Field column="Source">
+          <name><![CDATA[Motivo Queja]]></name>
+          <tag><![CDATA[MotivoQueja]]></tag>
+        </Field>
+        <Field column="Source">
+          <name><![CDATA[Origen Queja]]></name>
+          <tag><![CDATA[OrigenQueja]]></tag>
+        </Field>
+      </GridFields>
+    </DocType>
+  </DocTypes>
+  <CriteriaItems>
+    <Group name="Ticket" />
+  </CriteriaItems>
+</Explore>
