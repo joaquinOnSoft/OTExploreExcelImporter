@@ -302,7 +302,7 @@ We must add a new DocType tag under the **<DocTypes>** in **Explore.Configuratio
 
 We must add a new **Group** tag under the **<DoCriteriaItemscTypes>** in **Explore.Configuration.xml** in order to identify *Ticket* entries as a new group that can be used to filter by. In our example: 
 
-```
+```xml
 <CriteriaItems>
 
 	...
