@@ -458,7 +458,9 @@ We must define new fields to be able to import extra metadata related with each 
   <copyField source="origen_queja" dest="origen_queja_search" />
 ```
 
-#### Adding configuration to manage text in Spanish
+> **NOTE:** Field must be named using lowercase
+
+#### Adding configuration to manage text in Spanish (OPTIONAL)
 
 Add the following sections just before the &lt;field name="language"&gt; and *&lt;/schema&gt;* tags:
 
@@ -523,8 +525,6 @@ Add the following sections just before the &lt;field name="language"&gt; and *&l
    -->
 </schema>
 ```
-
-> **NOTE:** Field must be named using lowercase
 
 #### Customize the icon of your Doc Type
 
