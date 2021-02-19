@@ -231,6 +231,7 @@ Next section describe the step to be followed to create a new document type call
 > This utility includes and app that generates the sections to be included in the XML configuration files
 >
 > Execute: 
+>
 >   java com.opentext.explore.importer.excel.configgenerator.ConfigGeneratorLauncher --config src\main\resources\excel_mapping.json --doctype Ticket 
 
 ### Explore.Configuration.xml
