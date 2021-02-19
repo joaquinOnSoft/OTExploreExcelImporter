@@ -225,8 +225,13 @@ If you want to create a new "document type" to be analyze by OpenText Explore yo
 Next section describe the step to be followed to create a new document type called 'Ticket'. 
 
 > **NOTE:** The JSON configuration file located at `src/main/resources/excel_mapping.json` will be used as reference in this example
-
+>
 > The steps described on this section are only required if you want to create your own document type.
+> 
+> This utility includes and app that generates the sections to be included in the XML configuration files
+>
+> Execute: 
+>   java com.opentext.explore.importer.excel.configgenerator.ConfigGeneratorLauncher --config src\main\resources\excel_mapping.json --doctype Ticket 
 
 ### Explore.Configuration.xml
 
