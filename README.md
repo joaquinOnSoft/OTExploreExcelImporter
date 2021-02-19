@@ -217,76 +217,6 @@ This **excel_mapping.json** file shows an example:
 	]
 }
 ```
-## schema.xml (Solr)
-The Solr configuration file schema.xml is located at <SOLR_HOME>\solr-7.3.1\server\solr\configsets\interaction_config e.g.
-
-> D:\SolrCloud\solr-7.3.1\server\solr\configsets\interaction_config
-
-### Adding configuration to manage text in Spanish
-
-Add the following sections just before the &lt;field name="language"&gt; and *&lt;/schema&gt;* tags:
-
-```xml
-<schema name="default-config" version="1.6">
-
-   ...
-
-   <field name="es_title" type="es_explore_text" indexed="true" stored="true" />
-   <field name="es_content" type="es_explore_text" indexed="true" stored="true" />
-   <field name="es_content_1" type="es_explore_text" indexed="true" stored="true" />
-   <field name="es_content_2" type="es_explore_text" indexed="true" stored="true" />
-   <dynamicField name="es_survey_answer_text_*" type="es_explore_text" indexed="false" stored="true" />
-   <field name="es_survey_answer_text" type="es_explore_text" indexed="true" stored="true" multiValued="true" />
-   
-   <field name="es_search_fields" type="es_explore_text" indexed="true" stored="false" multiValued="true" />
-   <copyField source="es_content_1" dest="es_search_fields" />
-   <copyField source="es_content_2" dest="es_search_fields" />
-   <copyField source="es_content" dest="es_search_fields" />
-   <copyField source="es_title" dest="es_search_fields" />
-   <copyField source="es_survey_answer_text_*" dest="es_search_fields" />
-   
-   <field name="es_tf_search_fields" type="es_explore_terms_text" indexed="true" stored="false" multiValued="true" />
-   <copyField source="es_content_1" dest="es_tf_search_fields" />
-   <copyField source="es_content_2" dest="es_tf_search_fields" />
-   <copyField source="es_content" dest="es_tf_search_fields" />
-   <copyField source="es_title" dest="es_tf_search_fields" />
-   <copyField source="es_survey_answer_text_*" dest="es_tf_search_fields" />
-   
-   <field name="language" type="string" indexed="true" stored="false" docValues="true" />
-   
-   ...
-   
-   <fieldType name="es_explore_text" class="solr.TextField" positionIncrementGap="100">
-      <analyzer>
-         <tokenizer class="solr.StandardTokenizerFactory" />
-         <filter class="solr.LowerCaseFilterFactory" />
-         <filter class="solr.StopFilterFactory" ignoreCase="true" words="lang/stopwords_es.txt" format="snowball" />
-         <!--filter class="solr.GermanNormalizationFilterFactory"/ -->
-         <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt" />
-         <filter class="solr.SpanishLightStemFilterFactory" />
-         <!-- more aggressive: <filter class="solr.SnowballPorterFilterFactory" language="Spanish"/> -->
-      </analyzer>
-   </fieldType>
-   <fieldType name="es_explore_terms_text" class="solr.TextField" positionIncrementGap="100">
-      <analyzer>
-         <tokenizer class="solr.StandardTokenizerFactory" />
-         <filter class="solr.LowerCaseFilterFactory" />
-         <filter class="solr.StopFilterFactory" ignoreCase="true" words="lang/stopwords_es.txt" format="snowball" />
-         <!--filter class="solr.GermanNormalizationFilterFactory"/ -->
-      </analyzer>
-   </fieldType>
-   <!-- Similarity is the scoring routine for each document vs. a query.
-	       A custom Similarity or SimilarityFactory may be specified here, but 
-	       the default is fine for most applications.  
-	       For more info: http://lucene.apache.org/solr/guide/other-schema-elements.html#OtherSchemaElements-Similarity
-   -->
-   <!--
-	     <similarity class="com.example.solr.CustomSimilarityFactory">
-	       <str name="paramkey">param value</str>
-	     </similarity>
-   -->
-</schema>
-```
 
 ## Explore configuration
 
@@ -519,3 +449,170 @@ We must define new fields to be able to import extra metadata related with each 
   <field name="origen_queja_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
   <copyField source="origen_queja" dest="origen_queja_search" />
 ```
+
+#### Adding configuration to manage text in Spanish
+
+Add the following sections just before the &lt;field name="language"&gt; and *&lt;/schema&gt;* tags:
+
+```xml
+<schema name="default-config" version="1.6">
+
+   ...
+
+   <field name="es_title" type="es_explore_text" indexed="true" stored="true" />
+   <field name="es_content" type="es_explore_text" indexed="true" stored="true" />
+   <field name="es_content_1" type="es_explore_text" indexed="true" stored="true" />
+   <field name="es_content_2" type="es_explore_text" indexed="true" stored="true" />
+   <dynamicField name="es_survey_answer_text_*" type="es_explore_text" indexed="false" stored="true" />
+   <field name="es_survey_answer_text" type="es_explore_text" indexed="true" stored="true" multiValued="true" />
+   
+   <field name="es_search_fields" type="es_explore_text" indexed="true" stored="false" multiValued="true" />
+   <copyField source="es_content_1" dest="es_search_fields" />
+   <copyField source="es_content_2" dest="es_search_fields" />
+   <copyField source="es_content" dest="es_search_fields" />
+   <copyField source="es_title" dest="es_search_fields" />
+   <copyField source="es_survey_answer_text_*" dest="es_search_fields" />
+   
+   <field name="es_tf_search_fields" type="es_explore_terms_text" indexed="true" stored="false" multiValued="true" />
+   <copyField source="es_content_1" dest="es_tf_search_fields" />
+   <copyField source="es_content_2" dest="es_tf_search_fields" />
+   <copyField source="es_content" dest="es_tf_search_fields" />
+   <copyField source="es_title" dest="es_tf_search_fields" />
+   <copyField source="es_survey_answer_text_*" dest="es_tf_search_fields" />
+   
+   <field name="language" type="string" indexed="true" stored="false" docValues="true" />
+   
+   ...
+   
+   <fieldType name="es_explore_text" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+         <tokenizer class="solr.StandardTokenizerFactory" />
+         <filter class="solr.LowerCaseFilterFactory" />
+         <filter class="solr.StopFilterFactory" ignoreCase="true" words="lang/stopwords_es.txt" format="snowball" />
+         <!--filter class="solr.GermanNormalizationFilterFactory"/ -->
+         <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt" />
+         <filter class="solr.SpanishLightStemFilterFactory" />
+         <!-- more aggressive: <filter class="solr.SnowballPorterFilterFactory" language="Spanish"/> -->
+      </analyzer>
+   </fieldType>
+   <fieldType name="es_explore_terms_text" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+         <tokenizer class="solr.StandardTokenizerFactory" />
+         <filter class="solr.LowerCaseFilterFactory" />
+         <filter class="solr.StopFilterFactory" ignoreCase="true" words="lang/stopwords_es.txt" format="snowball" />
+         <!--filter class="solr.GermanNormalizationFilterFactory"/ -->
+      </analyzer>
+   </fieldType>
+   <!-- Similarity is the scoring routine for each document vs. a query.
+	       A custom Similarity or SimilarityFactory may be specified here, but 
+	       the default is fine for most applications.  
+	       For more info: http://lucene.apache.org/solr/guide/other-schema-elements.html#OtherSchemaElements-Similarity
+   -->
+   <!--
+	     <similarity class="com.example.solr.CustomSimilarityFactory">
+	       <str name="paramkey">param value</str>
+	     </similarity>
+   -->
+</schema>
+```
+
+> **NOTE:** Field must be named using lowercase
+
+#### Customize the icon of your Doc Type
+
+Each document type defined in Explore has his own icon. All the icons are stored on **[EXPLORE_HOME]\ExploreWeb\resources\images\icons** and follows this pattern:
+
+```
+explore_custom_icon_[DOC_TYPE_NAME_IN_LOWERCASE]_doc_type.png
+```
+
+where:
+
+ * explore_custom_icon_: Prefix
+ * [[DOC_TYPE_NAME_IN_LOWERCASE]]: Document type name in lowercase
+ * _doc_type.png: Suffix
+ 
+In our example:
+
+```
+icn_multichannel_ticket_16.png
+```
+
+> A 32x32 pixel image is recommended. 
+
+You must copy the ticket logo, called **icn_multichannel_ticket_16.png**, from the **img** folder in this project and paste on the **[[EXPLORE_HOME]]\ExploreWeb\resources\images\icons** of your Explore instance, e.g.
+
+```
+D:\Program Files (x86)\OpenText\Explore\ExploreWeb\resources\images\icons
+```
+
+### Applying changes on your instance
+
+Once you have modified **Explore.Configuration.xml** and **schema.xml** files you must follow these steps:
+
+ - Execute this command from a terminal/console as Administrator:
+
+```
+d:> cd d:\SolrCloud\solr-7.3.1\bin
+
+d:\SolrCloud\solr-7.3.1\bin> solr.cmd zk -z 127.0.0.1 upconfig -d d:\SolrCloud\solr-7.3.1\server\solr\configsets\interaction_config -n interaction_config 
+```
+
+- Open a browser and access to this URL: 
+
+```
+http://localhost:8983/solr/admin/collections?action=RELOAD&name=interaction&wt=xml
+```
+
+![alt text](img/solr-config-reload.png  "Solr configuration reload")
+		
+- Reset IIS from a terminal/console as administrator:
+
+```
+c:> iisreset
+```
+
+Once the configuration has been updated Explore will look like this:
+
+![alt text](img/explore-doc-types-and-extra-fields-in-group.png "Explore Doc types and extra fields in group")
+
+### Create a new Project in Explore
+
+In order to manage content from different client in the same instance in a demo environment you can create projects that keep together the info for each client. 
+
+Follow this steps:
+
+ - Open your Explore instance.
+ - Click on **Administer** in the top menu.
+ - Click on **Projects**
+ - Click on **New** (+ icon)
+ - Set the **Project name**: MyProject
+ 
+ ![alt text](img/explore-new-project.png "Explore New Project")
+ 
+ - Click on **Search Criteria**
+ - Provide the required fields:
+    - Search expression: *
+    - Types:  Ticket
+    - Include results that have "all" of the followings:
+       - Imported tag: is Ticket 
+ 
+ ![alt text](img/explore-project-filter.png "Explore Select criteria on Project")
+ 
+> NOTE: the value used on the "Imported tag" is the same value that you have used in the **itag** parameter.
+
+## Utilities
+
+### Removing all the imported XXXXXX inputs
+
+During your test you can decide to remove all the XXXXXX inputs imported. The fastest way to do it is just executing this command from a terminal/console as administrator:
+
+> NOTE: This will delete all the data in your Solr instance!
+
+```
+d:> cd d:\SolrCloud\solr-7.3.1\example\exampledocs
+
+d:\SolrCloud\solr-7.3.1\example\exampledocs> java -Dc=interaction -Ddata=args -Dcommit=true -jar post.jar "<delete><query>*:*</query></delete>"
+```
+
+> NOTE: The path of your Solr installation can vary in your environment.
