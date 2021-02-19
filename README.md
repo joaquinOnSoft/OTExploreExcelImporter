@@ -1,6 +1,6 @@
 # OTExploreExcelImporter
-Excel importer for OpenText Explore (Voice of the customer solution)
-This command-line application read an Excel file to ingest the columns of our interest, usually text messages. 
+Excel importer for OpenText Explore (Voice of the customer solution).
+This command-line application read an Excel file to ingest the columns of our interest, usually text messages, into OpenText Explore. 
 
 These text messages are inserted into the Solr Server used by **OpenText Explore**. 
 
@@ -220,6 +220,14 @@ This **excel_mapping.json** file shows an example:
 
 ## Explore configuration
 
+If you want to create a new "document type" to be analyze by OpenText Explore you must modify Explore and Solr configuration.
+
+Next section describe the step to be followed to create a new document type called 'Ticket'. 
+
+> **NOTE:** The JSON configuration file located at `src/main/resources/excel_mapping.json` will be used as reference in this example
+
+> The steps described on this section are only required if you want to create your own document type.
+
 ### Explore.Configuration.xml
 
 The configuration file **Explore.Configuration.xml** is located at **<EXPLORE_HOME>\Explore.Configuration.xml**, e.g. 
@@ -228,9 +236,9 @@ The configuration file **Explore.Configuration.xml** is located at **<EXPLORE_HO
 D:\Program Files (x86)\OpenText\Explore\Explore.Configuration.xml 
 ```
 
-#### XXXXXX DocType
+#### Ticket DocType
 
-We must add a new DocType tag under the **<DocTypes>** in **Explore.Configuration.xml** in order to identify 'XXXXXX' as a new input/document type analyzed by Explore. In our example: 
+We must add a new DocType tag under the **<DocTypes>** in **Explore.Configuration.xml** in order to identify 'Ticket' as a new input/document type analyzed by Explore. In our example: 
 
 ```xml
   <DocTypes>
@@ -290,9 +298,9 @@ We must add a new DocType tag under the **<DocTypes>** in **Explore.Configuratio
 ```
 
 
-#### Group XXXXXX
+#### Group Ticket
 
-We must add a new **Group** tag under the **<DoCriteriaItemscTypes>** in **Explore.Configuration.xml** in order to identify *XXXXXX* entries as a new group that can be used to filter by. In our example: 
+We must add a new **Group** tag under the **<DoCriteriaItemscTypes>** in **Explore.Configuration.xml** in order to identify *Ticket* entries as a new group that can be used to filter by. In our example: 
 
 ```
 <CriteriaItems>
@@ -400,9 +408,9 @@ The Solr configuration file **schema.xml** is located at **<SOLR_HOME>\solr-7.3.
 D:\SolrCloud\solr-7.3.1\server\solr\configsets\interaction_config
 ```
 
-#### New XXXXXX fields on Solr
+#### New `Ticket` fields on Solr
 
-We must define new fields to be able to import extra metadata related with each XXXXXX input 
+We must define new fields to be able to import extra metadata related with each Ticket input 
 
 ```xml
   <field name="fecha_cierre" type="string" indexed="true" docValues="true" />
@@ -601,11 +609,11 @@ Follow this steps:
  
 > NOTE: the value used on the "Imported tag" is the same value that you have used in the **itag** parameter.
 
-## Utilities
+## Tips & Tricks
 
-### Removing all the imported XXXXXX inputs
+### Removing all the imported `Ticket` inputs
 
-During your test you can decide to remove all the XXXXXX inputs imported. The fastest way to do it is just executing this command from a terminal/console as administrator:
+During your test you can decide to remove all the Ticket inputs imported. The fastest way to do it is just executing this command from a terminal/console as administrator:
 
 > NOTE: This will delete all the data in your Solr instance!
 
