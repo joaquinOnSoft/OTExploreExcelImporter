@@ -51,7 +51,7 @@ public class TestJSonMappingConfigReader extends TestCase {
 		
 		Field f16 = fields.get(16);
 		assertEquals("Origen_Queja_2", f16.getExcelName());
-		assertEquals("OrigenQueja", f16.getSolrName());
+		assertEquals("origen_queja", f16.getSolrName());
 		assertEquals("string", f16.getType());
 		assertEquals(false, f16.getSkip().booleanValue());			
 	}

@@ -71,7 +71,7 @@ public class TestExcelReader extends TestCase {
 				"Nullam quis magna et augue tempor semper sit amet eu nulla. Sed at elementum sapien. Sed lacinia vulputate mi. " + 
 				"Sed metus risus, mattis vel vehicula ut, pellentesque vel dui.", 
 				txtData0.getContent());		
-		assertEquals("Demora del Reparador", txtData0.getField("MotivoQueja"));
+		assertEquals("Demora del Reparador", txtData0.getField("motivo_queja"));
 		
 		//Check last row imported
 		TextData txtData2 = txtDataList.get(2);
@@ -80,11 +80,11 @@ public class TestExcelReader extends TestCase {
 		assertEquals("1584006", txtData2.getId());
 		assertEquals("1584006 Protección Salud (No Ofertable) Quejas de siniestros/prestaciones", txtData2.getTitle());
 		assertEquals("2020-12-01T00:00:00Z", txtData2.getPublishedDateAsString());
-		assertEquals("12/3/20", txtData2.getField("FechaCierre"));
-		assertEquals("N", txtData2.getField("EsContactar"));
-		assertEquals("7011", txtData2.getField("CPI"));
-		assertEquals("Protección Salud (No Ofertable)", txtData2.getField("Producto"));
-		assertEquals("Quejas de siniestros/prestaciones", txtData2.getField("TipoPeticion"));
+		assertEquals("12/3/20", txtData2.getField("fecha_cierre"));
+		assertEquals("N", txtData2.getField("es_contactar"));
+		assertEquals("7011", txtData2.getField("cpi"));
+		assertEquals("Protección Salud (No Ofertable)", txtData2.getField("producto"));
+		assertEquals("Quejas de siniestros/prestaciones", txtData2.getField("tipo_peticion"));
 		assertEquals("Quisque laoreet scelerisque convallis. Aliquam porttitor finibus diam et mollis. " + 
 				"Mauris maximus augue et maximus lacinia. Cras accumsan ullamcorper ex ac lobortis. Nulla vitae quam nulla. " + 
 				"Maecenas id mauris augue. Maecenas eget enim euismod, consequat nunc sed, faucibus felis. " + 
@@ -92,7 +92,7 @@ public class TestExcelReader extends TestCase {
 				"Vivamus sollicitudin ligula molestie, lobortis neque ut, ornare tortor. Nulla auctor varius sodales. " + 
 				"NULL", 
 				txtData2.getContent());
-		assertEquals("NULL", txtData2.getField("MotivoQueja"));
+		assertEquals("NULL", txtData2.getField("motivo_queja"));
 		
 	}
 	
