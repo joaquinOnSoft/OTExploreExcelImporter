@@ -1,14 +1,14 @@
 package com.opentext.explore.importer.excel.configgenerator;
 
-public class TestSolrSchemaXMLGenerator  extends TestAbstractXMLGenerator {
+public class TestExploreConfigurationXMLGenerator extends TestAbstractXMLGenerator {
 
 	@Override
 	protected String getXMLOutputFileName() {		
-		return "schema.xml";
+		return "Explore.Configuration.xml";
 	}
-	
+
 	@Override
 	protected AbstractConfigGenerator getXMLGenerator() {
-		return new SolrSchemaXMLGenerator();
-	}	
+		return new ExploreConfigurationXMLGenerator();
+	}
 }

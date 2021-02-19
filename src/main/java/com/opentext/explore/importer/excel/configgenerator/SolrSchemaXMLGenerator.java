@@ -19,104 +19,152 @@
  */
 package com.opentext.explore.importer.excel.configgenerator;
 
-import org.jdom2.CDATA;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
 import com.opentext.explore.importer.excel.pojo.Field;
 import com.opentext.explore.importer.excel.pojo.TextDataImporterMapping;
-import com.opentext.explore.util.TextUtil;
 
 public class SolrSchemaXMLGenerator extends AbstractConfigGenerator{
 
+	private static final String SUFFIX_SEARCH = "_search";
+
+	public SolrSchemaXMLGenerator() {
+		super();
+	}
+	
 	/**
-	 * Generates an XML called <strong>Explore.Configuration.xml"</strong> with the 
-	 * new content that must be added to the Explore config file with the same name.
+	 * <strong>schema.xml (Solr)</strong>
+	 * The Solr configuration file schema.xml is located at 
+	 * <SOLR_HOME>\solr-7.3.1\server\solr\configsets\interaction_config e.g.
 	 * 
-	 * Let's see and example:
-	 *  <Explore>
-	 *    <DocTypes>
-	 *  
-	 *      ...
-	 *      
-	 *      <DocType>
-	 *        <Name>Reddit</Name>
-	 *        <GridFields>
-	 *          <Field column="Source">
-	 *            <Name>Subreddit</Name>
-	 *            <Tag>subreddit</Tag>
-	 *          </Field>
-	 *          <Field column="Source">
-	 *            <Name>Score</Name>
-	 *            <Tag>score</Tag>
-	 *          </Field>
-	 *          <Field column="Source">
-	 *            <Name>Permalink</Name>
-	 *            <Tag>permalink</Tag>
-	 *          </Field>
-	 *        </GridFields>
-	 *      </DocType>	
-	 *    
-	 *      ...
-	 *    
-	 *    </DocTypes> 
-	 *  </Explore>
+	 *    D:\SolrCloud\solr-7.3.1\server\solr\configsets\interaction_config
+	 * 
+	 * <strong>New fields on Solr</strong>
+	 * We must define new fields to be able to import extra metadata related with each input.
+	 * Let's see an example:
+	 * <code>
+	 *   <!-- ADD YOUR CUSTOM FIELDS HERE -->
+	 * 
+	 *   <field name="subreddit" type="string" indexed="true" stored="false" docValues="true" />
+	 *   <field name="subreddit_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+	 *   <copyField source="subreddit" dest="subreddit_search" />
+	 * 
+	 *   <field name="score" type="pint" indexed="true" stored="false" docValues="true" />
+	 *   <field name="score_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+	 *   <copyField source="score" dest="score_search" />
+	 * 
+	 *   <field name="permalink" type="string" indexed="true" stored="false" docValues="true" />
+	 *   <field name="permalink_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+	 *   <copyField source="permalink" dest="permalink_search" />
+	 *   
+	 *   <field name="url" type="string" indexed="true" stored="false" docValues="true" />
+	 *   <field name="url_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+	 *   <copyField source="url" dest="url_search" />
+	 *   
+	 *   <field name="thumbnail" type="string" indexed="true" stored="false" docValues="true" />
+	 *   <field name="thumbnail_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+	 *   <copyField source="thumbnail" dest="thumbnail_search" />   
+	 *   
+	 *   <field name="rtag" type="string" indexed="true" stored="false" docValues="true" />
+	 *   <field name="rtag_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+	 *   <copyField source="rtag" dest="rtag_search" />
+	 * 
+	 * 
+	 *   <!-- END CUSTOM FIELDS -->
+	 * </code>
+	 * Generates an XML called <strong>schema.xml</strong> with the 
+	 * new content that must be added to the Solr configuration file with the same name.
 	 */
 	@Override
-	protected Document textDataToDoc(TextDataImporterMapping mapping, String docType) {
+	protected Document textDataToDoc(TextDataImporterMapping mapping, String tag) {
 		Document doc = null;
 
 		if (mapping != null && mapping.getFields() != null && mapping.getFields().size() > 0) {
-
 			doc = new Document();
-			// Root Element
-			Element eExplore = new Element("Explore");
-			Element eDocTypes = new Element("DocTypes");
-			Element eDocType = new Element("DocType");
-			Element eName = createBasicElement("name", new CDATA(docType));
-			eDocType.addContent(eName);
 			
-			Element eGridFields = new Element("GridFields");
-			
-			Element eCriteriaItems = new Element("CriteriaItems");
-			Element eGroup  = createElementWith1Attribute("Group", "name", docType);
+			Element eSchema = new Element("schema");
+			eSchema.setAttribute("name", "default-config");
+			eSchema.setAttribute("version", "1.6");
 			
 			for (Field field : mapping.getFields()) {
-				if(field.getSkip() == false) {										
-					eGridFields.addContent(createElementField(field));					
+				if(field.getSkip() == false && !defaultSolrFieldNames.contains(field.getSolrName())) {										
+					eSchema.addContent(createElementField(field));
+					eSchema.addContent(createElementFieldSearch(field));
+					eSchema.addContent(createElementCopyField(field));
 				}
 			}
-			
-			eDocType.addContent(eGridFields);						
-			eDocTypes.addContent(eDocType);
-			eExplore.addContent(eDocTypes);
-			
-			eCriteriaItems.addContent(eGroup);
-			eExplore.addContent(eCriteriaItems);			
-			
-			doc.addContent(eExplore);
+
+			doc.addContent(eSchema);
 		}
 
 		return doc;
 	}
-
-	private Element createElementField(Field field) {		
-		Element eField = createElementWith1Attribute("Field", "column", "Source");
-						
-		Element eName2 = createBasicElement("name", new CDATA(strToHumanReadable(field.getSolrName())));					
-		Element eTag = createBasicElement("tag", new CDATA(field.getSolrName()));
+	
+	/**
+	 * Generates and element that looks like this:
+	 * <code>
+	 *    <field name="rtag" type="string" indexed="true" stored="false" docValues="true" />
+	 * </code>   
+	 * @param field - Input field configuration
+	 * @return XML element
+	 */
+	protected Element createElementField(Field field) {
+		Element eField = new Element("field");
 		
-		eField.addContent(eName2);
-		eField.addContent(eTag);
+		//Set attributes
+		eField.setAttribute("name", field.getSolrName());
+		
+		if(field.getType() != null && field.getType().compareToIgnoreCase("integer") == 0) {
+			eField.setAttribute("type", "pint");	
+		}
+		else {
+			//string or date
+			eField.setAttribute("type", "string");
+		}
+		
+		eField.setAttribute("indexed", "true");
+		eField.setAttribute("docValues", "true");
 		
 		return eField;
 	}
 	
-	private String strToHumanReadable(String str) {
-		if(str!= null) {
-			str = TextUtil.camelCaseToHumanReadable(str);
-			str = TextUtil.snakeCaseToHumanReadable(str);
-		}
-		return str;
+	/**
+	 * Generates and element that looks like this:
+	 * <code>
+	 *    <field name="subreddit_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+	 * </code>   
+	 * @param field - Input field configuration
+	 * @return XML element
+	 */	
+	protected Element createElementFieldSearch(Field field) {
+		Element eField = new Element("field");
+		
+		//Set attributes
+		eField.setAttribute("name", field.getSolrName() + SUFFIX_SEARCH);
+		eField.setAttribute("type", "explore_filter_text");
+		eField.setAttribute("indexed", "true");
+		eField.setAttribute("stored", "false");
+		eField.setAttribute("multiValued", "true");
+		
+		return eField;
 	}
+	
+	/**
+	 * Generates and element that looks like this:
+	 * <code>
+	 *    <copyField source="subreddit" dest="subreddit_search" />
+	 * </code>   
+	 * @param field - Input field configuration
+	 * @return XML element
+	 */	
+	protected Element createElementCopyField(Field field) {
+		Element eField = new Element("copyField");
+		
+		//Set attributes
+		eField.setAttribute("source", field.getSolrName());
+		eField.setAttribute("dest", field.getSolrName() + SUFFIX_SEARCH);
+		
+		return eField;
+	}	
 }
