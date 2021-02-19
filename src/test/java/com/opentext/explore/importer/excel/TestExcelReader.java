@@ -33,17 +33,31 @@ import junit.framework.TestCase;
 
 public class TestExcelReader extends TestCase {
 	private ExcelReader reader = new ExcelReader();
+	private TextDataImporterMapping mapping;
+	
+	@Override
+	protected void setUp() {
+		File jsonConfigFile = FileUtil.getFileFromResources("excel_mapping.json");
+		JSonMappingConfigReader jsonConfigReader = new JSonMappingConfigReader();
+		mapping = jsonConfigReader.read(jsonConfigFile);	
+	}
+	
+	@Test
+	public void testReadNullPaht() {
+		String excelFilePath = null;
+		
+		assertNotNull(mapping);
+				
+		List<TextData> txtDataList = reader.read(excelFilePath, mapping);
+		assertNull(txtDataList);
+	}	
 	
 	@Test
 	public void testRead() {
 		File excelFile = FileUtil.getFileFromResources("input_example.xlsx");
 		
-		File jsonConfigFile = FileUtil.getFileFromResources("excel_mapping.json");
-		JSonMappingConfigReader jsonConfigReader = new JSonMappingConfigReader();
-		TextDataImporterMapping mapping = jsonConfigReader.read(jsonConfigFile);		
-				
 		assertNotNull(excelFile);
-		assertNotNull(jsonConfigFile);
+		assertNotNull(mapping);
 				
 		List<TextData> txtDataList = reader.read(excelFile, mapping);
 		

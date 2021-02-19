@@ -41,7 +41,7 @@ import junit.framework.TestCase;
 
 public class TestExcelTransformer extends TestCase {
 
-	List<TextData> txtDatas;
+	private List<TextData> txtDatas;
 	
 	private String docXMLFragment = 
 			"  <doc>\r\n" +
@@ -140,5 +140,5 @@ public class TestExcelTransformer extends TestCase {
 		
 		//Remove test XML
 		xml.delete();
-	}
+	}	
 }

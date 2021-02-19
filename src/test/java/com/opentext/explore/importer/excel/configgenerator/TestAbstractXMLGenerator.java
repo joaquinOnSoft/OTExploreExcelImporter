@@ -17,15 +17,33 @@ import junit.framework.TestCase;
 public abstract class TestAbstractXMLGenerator extends TestCase {
 
 	protected TextDataImporterMapping mapping = null;
+	protected String expectedContent;
 
 	@Override
 	protected void setUp() {
 		File jsonConfigFile = FileUtil.getFileFromResources("excel_mapping.json");
 		JSonMappingConfigReader jsonConfigReader = new JSonMappingConfigReader();
-		mapping = jsonConfigReader.read(jsonConfigFile);				
+		mapping = jsonConfigReader.read(jsonConfigFile);	
+				
+		File referenceXMLFile = FileUtil.getFileFromResources(getReferenceXMLFilePath());
+		expectedContent = fileToString(referenceXMLFile.getAbsolutePath());			
+	}
+
+	private String fileToString(String referenceXMLFilePath) {
+		String str = null;
+		try {
+            // default StandardCharsets.UTF_8
+			str = Files.readString(Paths.get(referenceXMLFilePath));
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
+		
+		return str;
 	}
 
 	protected abstract String getXMLOutputFileName();
+	
+	protected abstract String getReferenceXMLFilePath();
 	
 	protected abstract AbstractConfigGenerator getXMLGenerator();
 	
@@ -46,6 +64,8 @@ public abstract class TestAbstractXMLGenerator extends TestCase {
 		
 		File f = new File(path);
 		Path p = Paths.get(f.getAbsolutePath());
-		assertTrue(Files.exists(p));
+		assertTrue(Files.exists(p));	
+				
+		assertEquals(expectedContent, fileToString(f.getAbsolutePath()));
 	}	
 }

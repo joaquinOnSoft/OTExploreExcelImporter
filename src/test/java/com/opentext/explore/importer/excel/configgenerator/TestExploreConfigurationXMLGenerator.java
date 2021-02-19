@@ -11,4 +11,9 @@ public class TestExploreConfigurationXMLGenerator extends TestAbstractXMLGenerat
 	protected AbstractConfigGenerator getXMLGenerator() {
 		return new ExploreConfigurationXMLGenerator();
 	}
+	
+	@Override
+	protected String getReferenceXMLFilePath() {
+		return "Explore.Configuration.xml";
+	}		
 }
