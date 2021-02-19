@@ -286,4 +286,236 @@ Add the following sections just before the &lt;field name="language"&gt; and *&l
 	     </similarity>
    -->
 </schema>
-``` 
+```
+
+## Explore configuration
+
+### Explore.Configuration.xml
+
+The configuration file **Explore.Configuration.xml** is located at **<EXPLORE_HOME>\Explore.Configuration.xml**, e.g. 
+
+```
+D:\Program Files (x86)\OpenText\Explore\Explore.Configuration.xml 
+```
+
+#### XXXXXX DocType
+
+We must add a new DocType tag under the **<DocTypes>** in **Explore.Configuration.xml** in order to identify 'XXXXXX' as a new input/document type analyzed by Explore. In our example: 
+
+```xml
+  <DocTypes>
+  
+    ...
+    
+    <DocType>
+      <name>Ticket</name>
+      <GridFields>
+        <Field column="Source">
+          <name>fecha  cierre</name>
+          <tag>fecha_cierre</tag>
+        </Field>
+        <Field column="Source">
+          <name>es  contactar</name>
+          <tag>es_contactar</tag>
+        </Field>
+        <Field column="Source">
+          <name>cpi</name>
+          <tag>cpi</tag>
+        </Field>
+        <Field column="Source">
+          <name>producto</name>
+          <tag>producto</tag>
+        </Field>
+        <Field column="Source">
+          <name>tipo  peticion</name>
+          <tag>tipo_peticion</tag>
+        </Field>
+        <Field column="Source">
+          <name>comentarios  oficina</name>
+          <tag>comentarios_oficina</tag>
+        </Field>
+        <Field column="Source">
+          <name>departamento</name>
+          <tag>departamento</tag>
+        </Field>
+        <Field column="Source">
+          <name>estado</name>
+          <tag>estado</tag>
+        </Field>
+        <Field column="Source">
+          <name>familia</name>
+          <tag>familia</tag>
+        </Field>
+        <Field column="Source">
+          <name>motivo  queja</name>
+          <tag>motivo_queja</tag>
+        </Field>
+        <Field column="Source">
+          <name>origen  queja</name>
+          <tag>origen_queja</tag>
+        </Field>
+      </GridFields>
+    </DocType>
+  </DocTypes>
+```
+
+
+#### Group XXXXXX
+
+We must add a new **Group** tag under the **<DoCriteriaItemscTypes>** in **Explore.Configuration.xml** in order to identify *XXXXXX* entries as a new group that can be used to filter by. In our example: 
+
+```
+<CriteriaItems>
+
+	...
+	
+    <Group name="Ticket">
+      <CriteriaItem parametric="true" groupBy="alphabetical" numberBuckets="20">
+        <Name>fecha  cierre</Name>
+        <Tag>fecha_cierre</Tag>
+        <ComparatorGroup>string</ComparatorGroup>
+        <AssociatedDocTypes>
+          <DocType>Ticket</DocType>
+        </AssociatedDocTypes>
+      </CriteriaItem>
+      <CriteriaItem parametric="true" groupBy="alphabetical" numberBuckets="20">
+        <Name>es  contactar</Name>
+        <Tag>es_contactar</Tag>
+        <ComparatorGroup>string</ComparatorGroup>
+        <AssociatedDocTypes>
+          <DocType>Ticket</DocType>
+        </AssociatedDocTypes>
+      </CriteriaItem>
+      <CriteriaItem parametric="true" groupBy="numeric" advancedSearch="true" numericStats="true" numberBuckets="20">
+        <Name>cpi</Name>
+        <Tag>cpi</Tag>
+        <ComparatorGroup>numeric</ComparatorGroup>
+        <AssociatedDocTypes>
+          <DocType>Ticket</DocType>
+        </AssociatedDocTypes>
+      </CriteriaItem>
+      <CriteriaItem parametric="true" groupBy="alphabetical" numberBuckets="20">
+        <Name>producto</Name>
+        <Tag>producto</Tag>
+        <ComparatorGroup>string</ComparatorGroup>
+        <AssociatedDocTypes>
+          <DocType>Ticket</DocType>
+        </AssociatedDocTypes>
+      </CriteriaItem>
+      <CriteriaItem parametric="true" groupBy="alphabetical" numberBuckets="20">
+        <Name>tipo  peticion</Name>
+        <Tag>tipo_peticion</Tag>
+        <ComparatorGroup>string</ComparatorGroup>
+        <AssociatedDocTypes>
+          <DocType>Ticket</DocType>
+        </AssociatedDocTypes>
+      </CriteriaItem>
+      <CriteriaItem parametric="true" groupBy="alphabetical" numberBuckets="20">
+        <Name>comentarios  oficina</Name>
+        <Tag>comentarios_oficina</Tag>
+        <ComparatorGroup>string</ComparatorGroup>
+        <AssociatedDocTypes>
+          <DocType>Ticket</DocType>
+        </AssociatedDocTypes>
+      </CriteriaItem>
+      <CriteriaItem parametric="true" groupBy="alphabetical" numberBuckets="20">
+        <Name>departamento</Name>
+        <Tag>departamento</Tag>
+        <ComparatorGroup>string</ComparatorGroup>
+        <AssociatedDocTypes>
+          <DocType>Ticket</DocType>
+        </AssociatedDocTypes>
+      </CriteriaItem>
+      <CriteriaItem parametric="true" groupBy="alphabetical" numberBuckets="20">
+        <Name>estado</Name>
+        <Tag>estado</Tag>
+        <ComparatorGroup>string</ComparatorGroup>
+        <AssociatedDocTypes>
+          <DocType>Ticket</DocType>
+        </AssociatedDocTypes>
+      </CriteriaItem>
+      <CriteriaItem parametric="true" groupBy="alphabetical" numberBuckets="20">
+        <Name>familia</Name>
+        <Tag>familia</Tag>
+        <ComparatorGroup>string</ComparatorGroup>
+        <AssociatedDocTypes>
+          <DocType>Ticket</DocType>
+        </AssociatedDocTypes>
+      </CriteriaItem>
+      <CriteriaItem parametric="true" groupBy="alphabetical" numberBuckets="20">
+        <Name>motivo  queja</Name>
+        <Tag>motivo_queja</Tag>
+        <ComparatorGroup>string</ComparatorGroup>
+        <AssociatedDocTypes>
+          <DocType>Ticket</DocType>
+        </AssociatedDocTypes>
+      </CriteriaItem>
+      <CriteriaItem parametric="true" groupBy="alphabetical" numberBuckets="20">
+        <Name>origen  queja</Name>
+        <Tag>origen_queja</Tag>
+        <ComparatorGroup>string</ComparatorGroup>
+        <AssociatedDocTypes>
+          <DocType>Ticket</DocType>
+        </AssociatedDocTypes>
+      </CriteriaItem>
+    </Group>
+  </CriteriaItems>
+```
+
+### schema.xml (Solr)
+
+The Solr configuration file **schema.xml** is located at **<SOLR_HOME>\solr-7.3.1\server\solr\configsets\interaction_config** e.g. 
+
+```
+D:\SolrCloud\solr-7.3.1\server\solr\configsets\interaction_config
+```
+
+#### New XXXXXX fields on Solr
+
+We must define new fields to be able to import extra metadata related with each XXXXXX input 
+
+```xml
+  <field name="fecha_cierre" type="string" indexed="true" docValues="true" />
+  <field name="fecha_cierre_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+  <copyField source="fecha_cierre" dest="fecha_cierre_search" />
+  
+  <field name="es_contactar" type="string" indexed="true" docValues="true" />
+  <field name="es_contactar_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+  <copyField source="es_contactar" dest="es_contactar_search" />
+  
+  <field name="cpi" type="pint" indexed="true" docValues="true" />
+  <field name="cpi_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+  <copyField source="cpi" dest="cpi_search" />
+  
+  <field name="producto" type="string" indexed="true" docValues="true" />
+  <field name="producto_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+  <copyField source="producto" dest="producto_search" />
+  
+  <field name="tipo_peticion" type="string" indexed="true" docValues="true" />
+  <field name="tipo_peticion_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+  <copyField source="tipo_peticion" dest="tipo_peticion_search" />
+  
+  <field name="comentarios_oficina" type="string" indexed="true" docValues="true" />
+  <field name="comentarios_oficina_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+  <copyField source="comentarios_oficina" dest="comentarios_oficina_search" />
+  
+  <field name="departamento" type="string" indexed="true" docValues="true" />
+  <field name="departamento_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+  <copyField source="departamento" dest="departamento_search" />
+  
+  <field name="estado" type="string" indexed="true" docValues="true" />
+  <field name="estado_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+  <copyField source="estado" dest="estado_search" />
+  
+  <field name="familia" type="string" indexed="true" docValues="true" />
+  <field name="familia_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+  <copyField source="familia" dest="familia_search" />
+  
+  <field name="motivo_queja" type="string" indexed="true" docValues="true" />
+  <field name="motivo_queja_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+  <copyField source="motivo_queja" dest="motivo_queja_search" />
+  
+  <field name="origen_queja" type="string" indexed="true" docValues="true" />
+  <field name="origen_queja_search" type="explore_filter_text" indexed="true" stored="false" multiValued="true" />
+  <copyField source="origen_queja" dest="origen_queja_search" />
+```
