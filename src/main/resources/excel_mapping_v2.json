@@ -112,19 +112,19 @@
 			"excelName": "Familia",
 			"solrName": "familia",
 			"type": "string",
-			"skip": false					
+			"skip": true					
 		},
 		{
 			"excelName": "Producto",
 			"solrName": "producto",
 			"type": "integer",
-			"skip": false					
+			"skip": true					
 		},		
 		{
 			"excelName": "TipoPeticion",
 			"solrName": "tipo_peticion",
 			"type": "string",
-			"skip": false					
+			"skip": true					
 		},
 		{
 			"excelName": "Anterior_18_11_19",

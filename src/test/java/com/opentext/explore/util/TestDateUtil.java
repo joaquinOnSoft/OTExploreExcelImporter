@@ -76,7 +76,7 @@ public class TestDateUtil extends TestCase {
 		
 		try {
 			Date date = DateUtil.strToDate(strDate, format);
-			assertEquals("Tue Dec 01 00:00:00 CET 2020", date.toString());
+			assertEquals("Tue Dec 01 00:00:00 GMT 2020", date.toString());
 		} catch (ParseException e) {
 			fail(e.getMessage());
 		}

@@ -124,6 +124,7 @@ public class SolrSchemaXMLGenerator extends AbstractConfigGenerator{
 		}
 		
 		eField.setAttribute("indexed", "true");
+		eField.setAttribute("stored", "false");
 		eField.setAttribute("docValues", "true");
 		
 		return eField;
