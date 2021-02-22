@@ -1,5 +1,7 @@
 package com.opentext.explore.importer.excel.configgenerator;
 
+import org.junit.Test;
+
 public class TestExploreConfigurationXMLGenerator extends TestAbstractXMLGenerator {
 
 	@Override
@@ -15,5 +17,25 @@ public class TestExploreConfigurationXMLGenerator extends TestAbstractXMLGenerat
 	@Override
 	protected String getReferenceXMLFilePath() {
 		return "Explore.Configuration.xml";
-	}		
+	}
+	
+	@Test 
+	public void strToHumanReadable() {
+		AbstractConfigGenerator generator = getXMLGenerator();
+		String str = generator.strToHumanReadable("fecha_cierre");
+		
+		assertNotNull(str);
+		assertEquals("fecha cierre", str);
+		
+		str = generator.strToHumanReadable("fechaCierre");
+		
+		assertNotNull(str);
+		assertEquals("fecha cierre", str);
+		
+		str = generator.strToHumanReadable("fecha cierre");
+		
+		assertNotNull(str);
+		assertEquals("fecha cierre", str);
+		
+	}
 }

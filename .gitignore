@@ -9,6 +9,6 @@ build
 .settings/
 bin/
 *.log
-Explore.Configuration.xml
-schema.xml
+./Explore.Configuration.xml
+./schema.xml
 

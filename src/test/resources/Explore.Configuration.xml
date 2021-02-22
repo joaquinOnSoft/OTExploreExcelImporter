@@ -5,11 +5,11 @@
       <name>Ticket</name>
       <GridFields>
         <Field column="Source">
-          <name>fecha  cierre</name>
+          <name>fecha cierre</name>
           <tag>fecha_cierre</tag>
         </Field>
         <Field column="Source">
-          <name>es  contactar</name>
+          <name>es contactar</name>
           <tag>es_contactar</tag>
         </Field>
         <Field column="Source">
@@ -21,11 +21,11 @@
           <tag>producto</tag>
         </Field>
         <Field column="Source">
-          <name>tipo  peticion</name>
+          <name>tipo peticion</name>
           <tag>tipo_peticion</tag>
         </Field>
         <Field column="Source">
-          <name>comentarios  oficina</name>
+          <name>comentarios oficina</name>
           <tag>comentarios_oficina</tag>
         </Field>
         <Field column="Source">
@@ -41,11 +41,11 @@
           <tag>familia</tag>
         </Field>
         <Field column="Source">
-          <name>motivo  queja</name>
+          <name>motivo queja</name>
           <tag>motivo_queja</tag>
         </Field>
         <Field column="Source">
-          <name>origen  queja</name>
+          <name>origen queja</name>
           <tag>origen_queja</tag>
         </Field>
       </GridFields>
@@ -54,7 +54,7 @@
   <CriteriaItems>
     <Group name="Ticket">
       <CriteriaItem parametric="true" groupBy="alphabetical" numberBuckets="20">
-        <Name>fecha  cierre</Name>
+        <Name>fecha cierre</Name>
         <Tag>fecha_cierre</Tag>
         <ComparatorGroup>string</ComparatorGroup>
         <AssociatedDocTypes>
@@ -62,7 +62,7 @@
         </AssociatedDocTypes>
       </CriteriaItem>
       <CriteriaItem parametric="true" groupBy="alphabetical" numberBuckets="20">
-        <Name>es  contactar</Name>
+        <Name>es contactar</Name>
         <Tag>es_contactar</Tag>
         <ComparatorGroup>string</ComparatorGroup>
         <AssociatedDocTypes>
@@ -86,7 +86,7 @@
         </AssociatedDocTypes>
       </CriteriaItem>
       <CriteriaItem parametric="true" groupBy="alphabetical" numberBuckets="20">
-        <Name>tipo  peticion</Name>
+        <Name>tipo peticion</Name>
         <Tag>tipo_peticion</Tag>
         <ComparatorGroup>string</ComparatorGroup>
         <AssociatedDocTypes>
@@ -94,7 +94,7 @@
         </AssociatedDocTypes>
       </CriteriaItem>
       <CriteriaItem parametric="true" groupBy="alphabetical" numberBuckets="20">
-        <Name>comentarios  oficina</Name>
+        <Name>comentarios oficina</Name>
         <Tag>comentarios_oficina</Tag>
         <ComparatorGroup>string</ComparatorGroup>
         <AssociatedDocTypes>
@@ -126,7 +126,7 @@
         </AssociatedDocTypes>
       </CriteriaItem>
       <CriteriaItem parametric="true" groupBy="alphabetical" numberBuckets="20">
-        <Name>motivo  queja</Name>
+        <Name>motivo queja</Name>
         <Tag>motivo_queja</Tag>
         <ComparatorGroup>string</ComparatorGroup>
         <AssociatedDocTypes>
@@ -134,7 +134,7 @@
         </AssociatedDocTypes>
       </CriteriaItem>
       <CriteriaItem parametric="true" groupBy="alphabetical" numberBuckets="20">
-        <Name>origen  queja</Name>
+        <Name>origen queja</Name>
         <Tag>origen_queja</Tag>
         <ComparatorGroup>string</ComparatorGroup>
         <AssociatedDocTypes>
