@@ -31,28 +31,40 @@ import com.opentext.explore.util.FileUtil;
 import junit.framework.TestCase;
 
 public class TestJSonMappingConfigReader extends TestCase {
-	
-	@Test
-	public void testRead() {
-		File jsonConfigFile = FileUtil.getFileFromResources("excel_mapping.json");
+
+	private TextDataImporterMapping readConfigFile(String jsonFileName) {
+		File jsonConfigFile = FileUtil.getFileFromResources(jsonFileName);
 		JSonMappingConfigReader jsonConfigReader = new JSonMappingConfigReader();
 		TextDataImporterMapping mapping = jsonConfigReader.read(jsonConfigFile);
-		
+		return mapping;
+	}
+
+	@Test
+	public void testReadFileWithSpecialCharacters() {
+		TextDataImporterMapping mapping = readConfigFile("excel_mapping_with_special_characters.json");
+
+		assertNull(mapping);
+	}
+
+	@Test
+	public void testRead() {
+		TextDataImporterMapping mapping = readConfigFile("excel_mapping.json");
+
 		assertNotNull(mapping);
 		List<Field> fields = mapping.getFields();
 		assertNotNull(fields);
 		assertEquals(17, fields.size());
-		
+
 		Field f0 = fields.get(0);
 		assertEquals("Identificadorticket", f0.getExcelName());
 		assertEquals("reference_id", f0.getSolrName());
 		assertEquals("integer", f0.getType());
 		assertEquals(false, f0.getSkip().booleanValue());
-		
+
 		Field f16 = fields.get(16);
 		assertEquals("Origen_Queja_2", f16.getExcelName());
 		assertEquals("origen_queja", f16.getSolrName());
 		assertEquals("string", f16.getType());
-		assertEquals(false, f16.getSkip().booleanValue());			
+		assertEquals(false, f16.getSkip().booleanValue());
 	}
 }
