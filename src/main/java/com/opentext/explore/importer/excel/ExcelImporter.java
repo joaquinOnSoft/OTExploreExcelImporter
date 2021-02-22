@@ -42,6 +42,12 @@ public class ExcelImporter {
 				log.debug("Calling Solr method: /solr/interaction/otcaBatchUpdate ");
 				solrBatchUpdate(tag, txtDatas);
 			}
+			else {
+				log.info("Excel file doesn't exists or it doensn't contains data");
+			}
+		} 
+		else {
+			log.info("JSON configuration file doesn't exists or contains errors");
 		}
 	}
 
