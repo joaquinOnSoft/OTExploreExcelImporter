@@ -25,13 +25,12 @@ usage: java -jar OTExploreExcelImporter-21.1.jar
 ### Examples of invocation
 
 ```
-$ java -jar OTExploreExcelImporter.21.1.jar --excel input_example.xlsx --config excel_mapping.json 
+$ java -jar OTExploreExcelImporter.21.1.jar --excel input_example.xlsx --config excel_mapping.json --contentType Ticket
 
 $ java -jar OTExploreExcelImporter.21.1.jar --excel input_example.xlsx --config excel_mapping.json --host http://localhost:8983 
 
-$ java -jar OTExploreExcelImporter.21.1.jar --excel input_example.xlsx --config excel_mapping.json --host http://localhost:8983 --tag "Excel Importer"
-
-$ java -jar OTExploreExcelImporter.21.1.jar --excel input_example.xlsx --config excel_mapping.json --tag "Excel Importer"
+$ java -jar OTExploreExcelImporter.21.1.jar --excel input_example.xlsx --config excel_mapping.json --host http://localhost:8983 --tag "Excel Importer" --contentType Ticket
+$ java -jar OTExploreExcelImporter.21.1.jar --excel input_example.xlsx --config excel_mapping.json --tag "Excel Importer" --contentType Ticket
 ```
 
 
