@@ -27,7 +27,7 @@ public class ExcelImporter {
 	}
 	
 	
-	public void start(String excelPaht, String configPath, String tag) {
+	public void start(String excelPaht, String configPath, String contentType, String tag) {
 		log.debug("Reading config file: " + configPath);
 		JSonMappingConfigReader configReader = new JSonMappingConfigReader();
 		TextDataImporterMapping mapping = configReader.read(configPath);
@@ -35,7 +35,7 @@ public class ExcelImporter {
 		if(mapping != null) {
 			log.debug("Reading Excel file: " + excelPaht);
 			ExcelReader excelReader = new ExcelReader();
-			List<TextData> txtDatas = excelReader.read(excelPaht, mapping);
+			List<TextData> txtDatas = excelReader.read(excelPaht, mapping, contentType);
 			
 			if(txtDatas != null && txtDatas.size() > 0) {
 				log.debug(txtDatas.size() + " excel rows readed");

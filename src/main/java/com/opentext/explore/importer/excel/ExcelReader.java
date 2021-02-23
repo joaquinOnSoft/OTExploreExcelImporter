@@ -55,9 +55,9 @@ public class ExcelReader implements ITextDataReader, ISolrFields {
 	protected static final Logger log = LogManager.getLogger(ExcelReader.class);
 
 	@Override
-	public List<TextData> read(String filePath, TextDataImporterMapping config) {
+	public List<TextData> read(String filePath, TextDataImporterMapping config, String contentType) {
 		if (filePath != null) {
-			return read(new File(filePath), config);
+			return read(new File(filePath), config, contentType);
 		} else {
 			log.warn("File path was null");
 			return null;
@@ -65,7 +65,7 @@ public class ExcelReader implements ITextDataReader, ISolrFields {
 	}
 
 	@Override
-	public List<TextData> read(File file, TextDataImporterMapping config) {
+	public List<TextData> read(File file, TextDataImporterMapping config, String contentType) {
 		List<TextData> textDataList = new LinkedList<TextData>();
 		TextData txtData = null;
 
@@ -99,6 +99,7 @@ public class ExcelReader implements ITextDataReader, ISolrFields {
 
 				column = 0;
 				txtData = new TextData();
+				txtData.setType(contentType);
 				allCellValuesInRowAreEmpty = true;
 
 				for (Cell cell : row) {

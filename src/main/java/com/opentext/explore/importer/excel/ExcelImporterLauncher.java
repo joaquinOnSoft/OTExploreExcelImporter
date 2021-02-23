@@ -33,7 +33,11 @@ public class ExcelImporterLauncher {
 
 		Option configOption = new Option("c", "config", true, "JSON file that defines the mapping between excel columns and Solr fields");
 		configOption.setRequired(true);
-		options.addOption(configOption);				
+		options.addOption(configOption);	
+		
+		Option contentTypeOption = new Option("k", "contentType", true, "Explore content type, i.e. Ticket, Twitter, Reddit, Survey, Call...");
+		contentTypeOption.setRequired(true);
+		options.addOption(contentTypeOption);			
 		
 		CommandLineParser parser = new DefaultParser();
 		HelpFormatter formatter = new HelpFormatter();
@@ -46,6 +50,7 @@ public class ExcelImporterLauncher {
 			String host = DEFAULT_SOLR_URL;
 			String excelPath = null;
 			String configPath = null;
+			String contentType = null;
 			
 			if (cmd.hasOption("tag") || cmd.hasOption("t")) {
 				tag = cmd.getOptionValue("tag");
@@ -70,10 +75,14 @@ public class ExcelImporterLauncher {
 				if(!fileExists(configPath)) {
 					exitInError(configPath + " is not a file.");
 				}
-			}					
+			}		
+			
+			if (cmd.hasOption("contentType") || cmd.hasOption("k")) {
+				contentType = cmd.getOptionValue("contentType");
+			}			
 						
 			ExcelImporter importer = new ExcelImporter(host);
-			importer.start(excelPath, configPath, tag);
+			importer.start(excelPath, configPath, contentType, tag);
 			
 		}
 		catch (ParseException e) {

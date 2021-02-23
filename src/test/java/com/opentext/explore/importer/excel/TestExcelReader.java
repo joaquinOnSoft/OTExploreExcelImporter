@@ -32,6 +32,8 @@ import com.opentext.explore.util.FileUtil;
 import junit.framework.TestCase;
 
 public class TestExcelReader extends TestCase {
+	private static final String CONTENT_TYPE_TICKET = "Ticket";
+	
 	private ExcelReader reader = new ExcelReader();
 	private TextDataImporterMapping mapping;
 	
@@ -48,7 +50,7 @@ public class TestExcelReader extends TestCase {
 		
 		assertNotNull(mapping);
 				
-		List<TextData> txtDataList = reader.read(excelFilePath, mapping);
+		List<TextData> txtDataList = reader.read(excelFilePath, mapping, CONTENT_TYPE_TICKET);
 		assertNull(txtDataList);
 	}	
 	
@@ -59,7 +61,7 @@ public class TestExcelReader extends TestCase {
 		assertNotNull(excelFile);
 		assertNotNull(mapping);
 				
-		List<TextData> txtDataList = reader.read(excelFile, mapping);
+		List<TextData> txtDataList = reader.read(excelFile, mapping, CONTENT_TYPE_TICKET);
 		
 		assertNotNull(txtDataList);
 		assertTrue(txtDataList.size() > 0);
@@ -67,6 +69,7 @@ public class TestExcelReader extends TestCase {
 		
 		//Check first row imported
 		TextData txtData0 = txtDataList.get(0);
+		assertEquals(CONTENT_TYPE_TICKET, txtData0.getType());	
 		assertEquals("1583916", txtData0.getReferenceId());		
 		assertEquals("1583916", txtData0.getInteractionId());
 		assertEquals("1583916", txtData0.getId());
@@ -89,6 +92,7 @@ public class TestExcelReader extends TestCase {
 		
 		//Check last row imported
 		TextData txtData2 = txtDataList.get(2);
+		assertEquals(CONTENT_TYPE_TICKET, txtData2.getType());	
 		assertEquals("1584006", txtData2.getReferenceId());
 		assertEquals("1584006", txtData2.getInteractionId());
 		assertEquals("1584006", txtData2.getId());
