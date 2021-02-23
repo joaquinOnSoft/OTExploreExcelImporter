@@ -107,7 +107,7 @@ public class ExploreConfigurationXMLGenerator  extends AbstractConfigGenerator{
 			Element eExplore = new Element("Explore");
 			Element eDocTypes = new Element("DocTypes");
 			Element eDocType = new Element("DocType");
-			Element eName = createBasicElement("name", docType);
+			Element eName = createBasicElement("Name", docType);
 			eDocType.addContent(eName);
 			
 			Element eGridFields = new Element("GridFields");
@@ -138,8 +138,8 @@ public class ExploreConfigurationXMLGenerator  extends AbstractConfigGenerator{
 	private Element createElementField(Field field) {		
 		Element eField = createElementWith1Attribute("Field", "column", "Source");
 						
-		Element eName2 = createBasicElement("name", strToHumanReadable(field.getSolrName()));					
-		Element eTag = createBasicElement("tag", field.getSolrName());
+		Element eName2 = createBasicElement("Name", strToHumanReadable(field.getSolrName()));					
+		Element eTag = createBasicElement("Tag", field.getSolrName());
 		
 		eField.addContent(eName2);
 		eField.addContent(eTag);

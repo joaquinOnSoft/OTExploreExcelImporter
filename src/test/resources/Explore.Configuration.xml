@@ -2,51 +2,51 @@
 <Explore>
   <DocTypes>
     <DocType>
-      <name>Ticket</name>
+      <Name>Ticket</Name>
       <GridFields>
         <Field column="Source">
-          <name>fecha cierre</name>
-          <tag>fecha_cierre</tag>
+          <Name>fecha cierre</Name>
+          <Tag>fecha_cierre</Tag>
         </Field>
         <Field column="Source">
-          <name>es contactar</name>
-          <tag>es_contactar</tag>
+          <Name>es contactar</Name>
+          <Tag>es_contactar</Tag>
         </Field>
         <Field column="Source">
-          <name>cpi</name>
-          <tag>cpi</tag>
+          <Name>cpi</Name>
+          <Tag>cpi</Tag>
         </Field>
         <Field column="Source">
-          <name>producto</name>
-          <tag>producto</tag>
+          <Name>producto</Name>
+          <Tag>producto</Tag>
         </Field>
         <Field column="Source">
-          <name>tipo peticion</name>
-          <tag>tipo_peticion</tag>
+          <Name>tipo peticion</Name>
+          <Tag>tipo_peticion</Tag>
         </Field>
         <Field column="Source">
-          <name>comentarios oficina</name>
-          <tag>comentarios_oficina</tag>
+          <Name>comentarios oficina</Name>
+          <Tag>comentarios_oficina</Tag>
         </Field>
         <Field column="Source">
-          <name>departamento</name>
-          <tag>departamento</tag>
+          <Name>departamento</Name>
+          <Tag>departamento</Tag>
         </Field>
         <Field column="Source">
-          <name>estado</name>
-          <tag>estado</tag>
+          <Name>estado</Name>
+          <Tag>estado</Tag>
         </Field>
         <Field column="Source">
-          <name>familia</name>
-          <tag>familia</tag>
+          <Name>familia</Name>
+          <Tag>familia</Tag>
         </Field>
         <Field column="Source">
-          <name>motivo queja</name>
-          <tag>motivo_queja</tag>
+          <Name>motivo queja</Name>
+          <Tag>motivo_queja</Tag>
         </Field>
         <Field column="Source">
-          <name>origen queja</name>
-          <tag>origen_queja</tag>
+          <Name>origen queja</Name>
+          <Tag>origen_queja</Tag>
         </Field>
       </GridFields>
     </DocType>
