@@ -20,6 +20,7 @@ usage: java -jar OTExploreExcelImporter-21.1.jar
  - **-t, --tag**			(Optional)		Explore Importer tag. Added to each article importer. Default value: "Excel Importer"
  - **-e, --excel**			(Mandatory)		Excel file to be imported  
  - **-c, --config**			(Mandatory)		JSON file that defines the mapping between excel columns and Solr fields
+ - **-k, --contentType**	(Mandatory)		Explore's content type, i.e. Ticket, Reddit, Twitter, Survey, Call...
 
 ### Examples of invocation
 
