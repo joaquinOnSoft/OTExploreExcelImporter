@@ -142,13 +142,13 @@
 			"excelName": "Motivo_Queja",
 			"solrName": "motivo_queja",
 			"type": "string",
-			"skip": true					
+			"skip": false					
 		},		
 		{
 			"excelName": "Origen_Queja_2",
 			"solrName": "origen_queja_2",
 			"type": "string",
-			"skip": true					
+			"skip": false					
 		},
 		{
 			"excelName": "Motivo_Queja1",
