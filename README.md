@@ -249,18 +249,16 @@ We must add a new DocType tag under the **<DocTypes>** in **Explore.Configuratio
 
 ```xml
   <DocTypes>
-  
     ...
-    
     <DocType>
       <name>Ticket</name>
       <GridFields>
         <Field column="Source">
-          <name>fecha  cierre</name>
+          <name>fecha cierre</name>
           <tag>fecha_cierre</tag>
         </Field>
         <Field column="Source">
-          <name>es  contactar</name>
+          <name>es contactar</name>
           <tag>es_contactar</tag>
         </Field>
         <Field column="Source">
@@ -272,11 +270,11 @@ We must add a new DocType tag under the **<DocTypes>** in **Explore.Configuratio
           <tag>producto</tag>
         </Field>
         <Field column="Source">
-          <name>tipo  peticion</name>
+          <name>tipo peticion</name>
           <tag>tipo_peticion</tag>
         </Field>
         <Field column="Source">
-          <name>comentarios  oficina</name>
+          <name>comentarios oficina</name>
           <tag>comentarios_oficina</tag>
         </Field>
         <Field column="Source">
@@ -292,11 +290,11 @@ We must add a new DocType tag under the **<DocTypes>** in **Explore.Configuratio
           <tag>familia</tag>
         </Field>
         <Field column="Source">
-          <name>motivo  queja</name>
+          <name>motivo queja</name>
           <tag>motivo_queja</tag>
         </Field>
         <Field column="Source">
-          <name>origen  queja</name>
+          <name>origen queja</name>
           <tag>origen_queja</tag>
         </Field>
       </GridFields>
