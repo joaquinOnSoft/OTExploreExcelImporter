@@ -18,6 +18,8 @@ import com.opentext.explore.importer.excel.pojo.TextDataImporterMapping;
 
 public class ConfigGeneratorLauncher {
 	
+	private static final String CONFIG_FILE_SCHEMA_XML = "schema.xml";
+	private static final String CONFIG_FILE_EXPLORE_CONFIGURATION_XML = "Explore.Configuration.xml";
 	private static final Logger log = LogManager.getLogger(ConfigGeneratorLauncher.class);
 	
 	public static void main(String[] args) {		
@@ -59,11 +61,13 @@ public class ConfigGeneratorLauncher {
 			
 			//Generate Explore.Configuration.xml (Explore configuration)
 			ExploreConfigurationXMLGenerator eGenerator = new ExploreConfigurationXMLGenerator();
-			eGenerator.generateConfigFile(mapping, "Explore.Configuration.xml ", docType);
+			eGenerator.generateConfigFile(mapping, CONFIG_FILE_EXPLORE_CONFIGURATION_XML, docType);
+			log.info(CONFIG_FILE_EXPLORE_CONFIGURATION_XML + " created");
 			
 			//Generate schema.xml (Solr configuration)
 			SolrSchemaXMLGenerator sGenerator = new SolrSchemaXMLGenerator();
-			sGenerator.generateConfigFile(mapping, "schema.xml", docType);
+			sGenerator.generateConfigFile(mapping, CONFIG_FILE_SCHEMA_XML, docType);
+			log.info(CONFIG_FILE_SCHEMA_XML + " created");
 		}
 		catch (ParseException e) {
 			formatter.printHelp("java ConfigGeneratorLauncher --config excel_mapping.json --doctype Ticket", options);
