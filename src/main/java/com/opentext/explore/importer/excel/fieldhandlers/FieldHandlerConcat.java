@@ -80,11 +80,12 @@ public class FieldHandlerConcat extends AbstractFieldHandler {
 				strBuilder.append(txtData.getField(inputField));
 			}
 		}
-
+		
+		String fieldValue = strBuilder.toString().replace("NULL", "");
 		for (String outputField : outputFields) {
 			log.debug("Setting field '" + outputField + "'  value: " + strBuilder.toString());
-			txtData = setFieldValueByName(txtData, outputField, strBuilder.toString());
-		}
+			txtData = setFieldValueByName(txtData, outputField, fieldValue);
+		}		
 
 		return txtData;
 	}

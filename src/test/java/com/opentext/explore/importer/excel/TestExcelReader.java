@@ -107,8 +107,7 @@ public class TestExcelReader extends TestCase {
 				"Mauris maximus augue et maximus lacinia. Cras accumsan ullamcorper ex ac lobortis. Nulla vitae quam nulla. " + 
 				"Maecenas id mauris augue. Maecenas eget enim euismod, consequat nunc sed, faucibus felis. " + 
 				"Aliquam varius blandit semper. Integer pharetra ante turpis, feugiat ultrices arcu varius a. " + 
-				"Vivamus sollicitudin ligula molestie, lobortis neque ut, ornare tortor. Nulla auctor varius sodales. " + 
-				"NULL", 
+				"Vivamus sollicitudin ligula molestie, lobortis neque ut, ornare tortor. Nulla auctor varius sodales. ", 
 				txtData2.getContent());
 		assertEquals("NULL", txtData2.getField("motivo_queja"));
 		
