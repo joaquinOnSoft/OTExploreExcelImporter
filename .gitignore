@@ -11,4 +11,6 @@ bin/
 *.log
 ./Explore.Configuration.xml
 ./schema.xml
+Speech analytics v2.xlsx
+Speech analytics.xlsx
 
