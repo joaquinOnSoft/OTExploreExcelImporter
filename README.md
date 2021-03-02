@@ -467,6 +467,7 @@ We must define new fields to be able to import extra metadata related with each 
 
 #### Adding configuration to manage text in Spanish (OPTIONAL)
 
+##### schema.xml
 Add the following sections just before the &lt;field name="language"&gt; and *&lt;/schema&gt;* tags:
 
 ```xml
@@ -529,6 +530,53 @@ Add the following sections just before the &lt;field name="language"&gt; and *&l
 	     </similarity>
    -->
 </schema>
+```
+
+##### solrconfig.xml
+Navigate to **<root>:/SolrCloud/solr-7.3.1/server/solr/configsets/interaction_config** and open **solrconfig.xml** in a text editor.
+
+Search for otcaBatchUpdateHandler and do the following for each language you expect to process.
+
+   - Locate the `<str name="otca.language.map">eng:en,spa:es</str>` field and add the two-character and three-character language codes 
+   - Locate the `<str name="otca.language.whitelist">en,es</str>` field and add the two-character language code
+
+```xml
+I was missing the part related to solrconfig.xml. The section related to schemaxml was in place.
+
+  <requestHandler name="/otcaBatchUpdate" class="com.opentext.solr.handler.OTCABatchProcUpdateRequestHandler">
+    <lst name="defaults">
+      <str name="update.chain">exploreIndexChain</str>
+	  <str name="exploreDoc.fl">diarisation_speaker_1,diarisation_speaker_2</str>
+      <str name="otca">true</str>
+      <str name="otca.batchSize">25</str>
+	  <str name="otca.url">http://localhost:40002/rs/</str>
+	  <str name="otca.methods">languagedetector,diarisation,nsentiment,nsummarizer</str>
+	  <str name="otca.readingTimeout">360000</str>
+	  <str name="otca.connectionTimeout">360000</str>
+	  <str name="otca.excludedTypes">excludedType1,excludedType2</str>
+	  <str name="otca.language.whitelist">en,es</str>
+	  <str name="otca.language.fallback">en</str>
+	  <str name="otca.language.map">eng:en,spa:es</str>
+	  <str name="otca.language.mode">text</str>
+	  <str name="otca.language.outputParagraphs">false</str>
+	  <str name="otca.language.overwrite">false</str>
+	  <str name="otca.language.excludedTypes">excludedType1,excludedType2</str>
+	  <str name="otca.diarisation.KBID">Diarisation</str>
+	  <str name="otca.diarisation.resolveSameIdentification">true</str>
+	  <str name="otca.diarisation.overwrite">false</str>
+	  <str name="otca.diarisation.excludedTypes">excludedType1,excludedType2</str>
+	  <str name="otca.sentiment.textLength">6000</str>
+	  <str name="otca.sentiment.overwrite">false</str>
+	  <str name="otca.sentiment.excludedTypes">excludedType1,excludedType2</str>
+	  <str name="otca.summary.KBID">IPTC</str>
+	  <str name="otca.summary.numSentences">2</str>
+	  <str name="otca.summary.textLength">6000</str>
+	  <str name="otca.summary.populateEmpty">true</str>
+	  <str name="otca.summary.overwrite">false</str>
+	  <str name="otca.summary.excludedTypes">excludedType1,excludedType2</str>
+    </lst>
+  </requestHandler>
+
 ```
 
 #### Customize the icon of your Doc Type

@@ -214,7 +214,7 @@
 		},
 		{
 			"inputSolrNames": ["published_date"],
-			"outputSolrNames": ["date_time"],
+			"outputSolrNames": ["date_time", "fecha_apertura"],
 			"javaClass": "com.opentext.explore.importer.excel.fieldhandlers.FieldHandlerCopy"
 		},		
 		{
